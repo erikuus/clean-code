@@ -1,7 +1,3 @@
----
-description: What is this gitbook about?
----
-
 # Introduction
 
 This is my **summary** of the book "**Clean Code**" by Robert C. Martin.

@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Introduction](README.md)
+* [Conventions](conventions.md)
 
 ## The key principles <a id="key-principles"></a>
 
