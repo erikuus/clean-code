@@ -14,7 +14,7 @@ Please note that I use my own PHP code to illustrate the key points. The Clean C
 
 ## About the author
 
-**Erik Uus** is experienced Software Engineer. Skilled in SQL, PHP and Javascript. 
+I am an experienced Software Engineer. Skilled in SQL, PHP and Javascript. 
 
 I don't think any software can be fundamentally important. I feel that even if all possible problems that software can solve are solved, the problems of life have still not been touched at all. And still, I am passionate about my work. I have adopted Software Craftsmanship ideology.
 
