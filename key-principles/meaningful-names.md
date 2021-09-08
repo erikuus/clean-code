@@ -92,9 +92,7 @@ If a variable or constant might be seen or used in multiple places in a body of 
 What does add mean? Concate strings? Insert a record in a table? Append a value to the end of an array?
 
 {% hint style="danger" %}
-`function add($value)    
-function add($value)    
-function add($value)`
+`function add($value)`
 {% endhint %}
 
 {% hint style="success" %}
