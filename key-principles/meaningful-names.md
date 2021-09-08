@@ -2,7 +2,7 @@
 
 ## Use intention-revealing names
 
-What does the list represent? 
+What does the list represent?
 
 {% hint style="danger" %}
 `$theList`
@@ -29,7 +29,7 @@ Of what type is the account list? String? Array of strings? Array of objects?
 How long does it take to spot the subtle difference?
 
 {% hint style="danger" %}
-`class ControllerForEfficientHandlingOfStrings  
+`class ControllerForEfficientHandlingOfStrings    
 class ControllerForEfficientStorageOfStrings`
 {% endhint %}
 
@@ -38,8 +38,8 @@ class ControllerForEfficientStorageOfStrings`
 How do these different names convey different meanings?
 
 {% hint style="danger" %}
-`class Product  
-class ProductInfo  
+`class Product    
+class ProductInfo    
 class ProductData`
 {% endhint %}
 
@@ -73,7 +73,7 @@ A better solution is to create a class named Address. If you need to differentia
 
 ## Adjust the length of a name to the size of its scope
 
-Is it obvious outside the class body that WD is an acronym for work days per week? 
+Is it obvious outside the class body that WD is an acronym for work days per week?
 
 {% hint style="danger" %}
 `const WD`
@@ -92,14 +92,14 @@ If a variable or constant might be seen or used in multiple places in a body of 
 What does add mean? Concate strings? Insert a record in a table? Append a value to the end of an array?
 
 {% hint style="danger" %}
-`function add($value)  
-function add($value)  
+`function add($value)    
+function add($value)    
 function add($value)`
 {% endhint %}
 
 {% hint style="success" %}
-`function concate($value)  
-function insert($value)  
+`function concate($value)    
+function insert($value)    
 function append($value)`
 {% endhint %}
 
@@ -118,25 +118,25 @@ What does the term "document" mean in the archives domain? Are photos considered
 ## Methods should have verb names
 
 {% hint style="success" %}
-`function postPayment()  
-function deletePage()  
+`function postPayment()    
+function deletePage()    
 function save()`
 {% endhint %}
 
 ## Classes should have noun names
 
 {% hint style="success" %}
-`class Customer  
-class WikiPage  
+`class Customer    
+class WikiPage    
 class Account`
 {% endhint %}
 
 Avoid these words in the name of a class:
 
 {% hint style="danger" %}
-`Manager  
-Processor  
-Data  
+`Manager    
+Processor    
+Data    
 Info`
 {% endhint %}
 
