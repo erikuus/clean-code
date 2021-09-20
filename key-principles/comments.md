@@ -22,7 +22,3 @@
 
 ## Don't give too much information
 
-
-
-
-
