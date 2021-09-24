@@ -36,7 +36,7 @@ private m_className;
 /**  
  * The properties of the reporter listener  
  */  
-private m_className;`
+private m_properties;`
 {% endhint %}
 
 ## Place dependent functions vertically close
