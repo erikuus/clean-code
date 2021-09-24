@@ -28,7 +28,7 @@ The number of asserts in a test ought to be minimized. Test a single concept in 
     $form = new Form();  
   
     $model = new Whitelist();  
-    $model->setAttributes($form->get('emptyEmployeeId'));  
+    $model->setAttributes($form->get('noEmployeeId'));  
     $this->assertFalse($model->validate());  
 }`
 {% endhint %}
@@ -39,11 +39,11 @@ The number of asserts in a test ought to be minimized. Test a single concept in 
     $form = new Form();  
   
     $model = new Whitelist();  
-    $model->setAttributes($form->get('emptyPattern'));  
+    $model->setAttributes($form->get('noPattern'));  
     $this->assertFalse($model->validate());  
   
     $model = new Whitelist();  
-    $model->setAttributes($form->get('emptyEmployeeId'));  
+    $model->setAttributes($form->get('noEmployeeId'));  
     $this->assertFalse($model->validate());  
   
     $model = new Whitelist();  
@@ -58,7 +58,7 @@ The number of asserts in a test ought to be minimized. Test a single concept in 
 
 Tests should be fast. They should run quickly. When tests run slow, you won’t want to run them frequently.
 
-### 👤 Independent 
+### 👤Independent 
 
 Tests should not depend on each other. One test should not set up the conditions for the next test. You should be able to run each test independently and run the tests in any order you like.
 
