@@ -12,7 +12,7 @@ We can simplify our code considerably by wrapping the API that we are calling an
 } catch (UnlockedException $e) {    
     log('Unlock exception', $e->getMessage());   
 } catch (GMXError $e) {   
-    log('GMX error', $e->getMessage);   
+    log('GMX error', $e->getMessage());   
 }`
 {% endhint %}
 
