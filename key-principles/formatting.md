@@ -43,6 +43,8 @@ private m_properties;`
 
 If one function calls another, they should be vertically close, and the caller should be above the callee.
 
+
+
 ## Place similar functions vertically close
 
 If a group of functions perform a similar operation, they should be vertically close.
