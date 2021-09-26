@@ -5,17 +5,21 @@
 Each blank line is a visual cue that identifies a new and separate concept.
 
 {% hint style="success" %}
-`package fitnesse.wikitext.widgets;`
+```
+Yii::import('application.modules.enquiry.models.*');
 
-`import java.util.regex.*;`
+Yii::import('application.modules.shop.models.*');
 
-`public class BoldWidget extends ParentWidget {`
+$model = $this->loadModel();
+```
 {% endhint %}
 
 {% hint style="danger" %}
-`package fitnesse.wikitext.widgets;   
-import java.util.regex.*;   
-public class BoldWidget extends ParentWidge {`
+```
+Yii::import('application.modules.enquiry.models.*');
+Yii::import('application.modules.shop.models.*');
+$model = $this->loadModel();
+```
 {% endhint %}
 
 ## Use vertical density for tightly related concepts
@@ -23,47 +27,122 @@ public class BoldWidget extends ParentWidge {`
 Lines of code that are tightly related should appear vertically dense.
 
 {% hint style="success" %}
-`private m_className;   
-private m_properties;`
+```
+public $containerTagName;
+public $containerCssClass;
+```
 {% endhint %}
 
 {% hint style="danger" %}
-`/**  
- * The class name of the reporter listener  
- */  
-private m_className;  
-  
-/**  
- * The properties of the reporter listener  
- */  
-private m_properties;`
+```
+/**
+ * The HTML tag name for the widget container
+ */
+public $containerTagName;
+
+/**
+ * The CSS class for the widget container
+ */
+public $containerCssClass;
+```
 {% endhint %}
 
 ## Place dependent functions vertically close
 
 If one function calls another, they should be vertically close, and the caller should be above the callee.
 
+{% hint style="success" %}
+```
+public function getTypeLabel($type)
+{
+    $options = $this->getTypeOptions();
+    return isset($options[$type]) ? $options[$type] : "unknown ({$type})";
+}
+
+public function getTypeOptions()
+{
+    return [
+        self::TYPE_CLIENT => 'Client',
+        self::TYPE_EMPLOYEE => 'Employee'
+    ];
+}
+```
+{% endhint %}
+
 ## Place similar functions vertically close
 
 If a group of functions perform a similar operation, they should be vertically close.
 
+{% hint style="success" %}
+```
+public function clientToEmployee()
+{
+    $this->type = self::TYPE_EMPLOYEE;
+    $this->update('type');
+}
+
+public function employeeToClient()
+{
+    $this->revokeAll();
+    $this->type = self::TYPE_CLIENT;
+    $this->update('type');
+}
+```
+{% endhint %}
+
 ## Declare variables vertically close to their usage
 
+{% hint style="success" %}
+```
+$result = [];
+foreach ($models as $i => $model) {
+    $model->validate($attributes);
+    foreach ($model->getErrors() as $attribute => $errors) {
+        $result[Html::getInputId($model, "[$i]" . $attribute)] = $errors;
+    }
+}
+```
+{% endhint %}
+
 Good functions are very short and local variables may appear at the top of each function.
+
+{% hint style="success" %}
+```
+public static function validate($model, $attributes = null)
+{
+    $result = [];
+
+    if ($attributes instanceof Model) {
+        $models = func_get_args();
+        $attributes = null;
+    } else {
+        $models = [$model];
+    }
+
+    foreach ($models as $model) {
+        $model->validate($attributes);
+        foreach ($model->getErrors() as $attribute => $errors) {
+            $result[Html::getInputId($model, $attribute)] = $errors;
+        }
+    }
+
+    return $result;
+}
+```
+{% endhint %}
 
 ## Use horizontal separation and density so that code reads nicely
 
 The factors have no white space between them because they are high precedence. The terms are separated by white space because addition and subtraction are lower precedence.
 
 {% hint style="success" %}
-`return (-b + Math.sqrt(determinant)) / (2*a);`
+`return $actualPrice - ($actualPrice*($discount/100));`
 {% endhint %}
 
 {% hint style="danger" %}
-`return (-b+Math.sqrt(determinant))/(2*a);`
+`return $actualPrice-($actualPrice*($discount/100))`;
 {% endhint %}
 
 {% hint style="danger" %}
-`return (-b + Math.sqrt(determinant)) / (2 * a);`
+`return $actualPrice - ($actualPrice * ($discount / 100))`;
 {% endhint %}
-
