@@ -30,12 +30,12 @@ try {
 class LocalPort   
 {   
     private $port;  
- 
+
     public function _construct(Port $port)  
     {  
         $this->port=$port;   
     }  
-   
+
     public function open()   
     {   
         try {   
@@ -63,8 +63,4 @@ Returning error codes leads to deeply nested structures.
 If the keyword try exists in a function, it should be the very first word in the function and there should be nothing after the catch/finally blocks.
 
 {% page-ref page="functions.md" %}
-
-
-
-
 
