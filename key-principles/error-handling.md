@@ -5,7 +5,8 @@
 We can simplify our code considerably by wrapping the API that we are calling and making sure that it returns a common exception type.
 
 {% hint style="danger" %}
-`try {   
+```
+try {   
     $port->open();   
 } catch (DeviceResponseException $e) {   
     log('Device response exception', $e->getMessage());   
@@ -13,20 +14,24 @@ We can simplify our code considerably by wrapping the API that we are calling an
     log('Unlock exception', $e->getMessage());   
 } catch (GMXError $e) {   
     log('GMX error', $e->getMessage());   
-}`
+}
+```
 {% endhint %}
 
 {% hint style="success" %}
-`try {  
+```
+try {  
     $localPort = new LocalPort($port);      
     $localPort->open();  
 } catch (PortDeviceFailure $e) {  
     log('Port device failure', $e->getMessage());  
-}`
+}
+```
 {% endhint %}
 
 {% hint style="success" %}
-`class LocalPort   
+```
+class LocalPort   
 {   
     private $port;  
   
@@ -47,7 +52,8 @@ We can simplify our code considerably by wrapping the API that we are calling an
             throw new PortDeviceFailure($e->getMessage());   
         }   
     }   
-}`
+}
+```
 {% endhint %}
 
 ## Prefer exceptions to returning error codes
