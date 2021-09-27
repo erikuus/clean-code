@@ -15,11 +15,9 @@ $model = $this->loadModel();
 {% endhint %}
 
 {% hint style="danger" %}
-```
-Yii::import('application.modules.enquiry.models.*');
+`Yii::import('application.modules.enquiry.models.*');
 Yii::import('application.modules.shop.models.*');
-$model = $this->loadModel();
-```
+$model = $this->loadModel();`
 {% endhint %}
 
 ## Use vertical density for tightly related concepts
@@ -27,15 +25,12 @@ $model = $this->loadModel();
 Lines of code that are tightly related should appear vertically dense.
 
 {% hint style="success" %}
-```
-public $containerTagName;
-public $containerCssClass;
-```
+`public $containerTagName;
+public $containerCssClass;`
 {% endhint %}
 
 {% hint style="danger" %}
-```
-/**
+`/**
  * The HTML tag name for the widget container
  */
 public $containerTagName;
@@ -43,8 +38,7 @@ public $containerTagName;
 /**
  * The CSS class for the widget container
  */
-public $containerCssClass;
-```
+public $containerCssClass;`
 {% endhint %}
 
 ## Place dependent functions vertically close
@@ -52,8 +46,7 @@ public $containerCssClass;
 If one function calls another, they should be vertically close, and the caller should be above the callee.
 
 {% hint style="success" %}
-```
-public function getTypeLabel($type)
+`public function getTypeLabel($type)
 {
     $options = $this->getTypeOptions();
     return isset($options[$type]) ? $options[$type] : "unknown ({$type})";
@@ -65,8 +58,7 @@ public function getTypeOptions()
         self::TYPE_CLIENT => 'Client',
         self::TYPE_EMPLOYEE => 'Employee'
     ];
-}
-```
+}`
 {% endhint %}
 
 ## Place similar functions vertically close
@@ -74,8 +66,7 @@ public function getTypeOptions()
 If a group of functions perform a similar operation, they should be vertically close.
 
 {% hint style="success" %}
-```
-public function clientToEmployee()
+`public function clientToEmployee()
 {
     $this->type = self::TYPE_EMPLOYEE;
     $this->update('type');
@@ -86,29 +77,25 @@ public function employeeToClient()
     $this->revokeAll();
     $this->type = self::TYPE_CLIENT;
     $this->update('type');
-}
-```
+}`
 {% endhint %}
 
 ## Declare variables vertically close to their usage
 
 {% hint style="success" %}
-```
-$result = [];
+`$result = [];
 foreach ($models as $i => $model) {
     $model->validate($attributes);
     foreach ($model->getErrors() as $attribute => $errors) {
         $result[Html::getInputId($model, "[$i]" . $attribute)] = $errors;
     }
-}
-```
+}`
 {% endhint %}
 
 Good functions are very short and local variables may appear at the top of each function.
 
 {% hint style="success" %}
-```
-public static function validate($model, $attributes = null)
+`public static function validate($model, $attributes = null)
 {
     $result = [];
 
@@ -127,8 +114,7 @@ public static function validate($model, $attributes = null)
     }
 
     return $result;
-}
-```
+}`
 {% endhint %}
 
 ## Use horizontal separation and density so that code reads nicely
