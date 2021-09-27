@@ -23,7 +23,8 @@ Readability is even more important in unit tests than it is in production code.
 The number of asserts in a test ought to be minimized. Test a single concept in each test function.
 
 {% hint style="success" %}
-`function testValidateReturnsFalseIfEmployeeIdIsMissing()  
+```php
+function testValidateReturnsFalseIfEmployeeIdIsMissing()  
 {  
     $form = new Form();  
   
@@ -34,7 +35,8 @@ The number of asserts in a test ought to be minimized. Test a single concept in 
 {% endhint %}
 
 {% hint style="danger" %}
-`function testValidate()   
+```php
+function testValidate()   
 {   
     $form = new Form();  
   
@@ -49,12 +51,13 @@ The number of asserts in a test ought to be minimized. Test a single concept in 
     $model = new Whitelist();  
     $model->setAttributes($form->get('validForm'));  
     $this->assertTrue($model->validate());  
-}`
+}
+```
 {% endhint %}
 
 ## Follow five rules that form the acronym F.I.R.S.T.
 
-### \*\*\*\*🏁**Fast**
+### 🏁Fast
 
 Tests should be fast. They should run quickly. When tests run slow, you won’t want to run them frequently.
 
