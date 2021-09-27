@@ -31,7 +31,8 @@ function testValidateReturnsFalseIfEmployeeIdIsMissing()
     $model = new Whitelist();  
     $model->setAttributes($form->get('noEmployeeId'));  
     $this->assertFalse($model->validate());  
-}`
+}
+```
 {% endhint %}
 
 {% hint style="danger" %}
