@@ -4,16 +4,6 @@
 
 Each blank line is a visual cue that identifies a new and separate concept.
 
-{% hint style="success" %}
-```php
-Yii::import('application.modules.enquiry.models.*');
-
-Yii::import('application.modules.shop.models.*');
-
-$model = $this->loadModel();
-```
-{% endhint %}
-
 {% hint style="danger" %}
 ```php
 Yii::import('application.modules.enquiry.models.*');
@@ -22,16 +12,19 @@ $model = $this->loadModel();
 ```
 {% endhint %}
 
+{% hint style="success" %}
+```php
+Yii::import('application.modules.enquiry.models.*');
+
+Yii::import('application.modules.shop.models.*');
+
+$model = $this->loadModel();
+```
+{% endhint %}
+
 ## Use vertical density for tightly related concepts
 
 Lines of code that are tightly related should appear vertically dense.
-
-{% hint style="success" %}
-```php
-public $containerTagName;
-public $containerCssClass;
-```
-{% endhint %}
 
 {% hint style="danger" %}
 ```php
@@ -43,6 +36,13 @@ public $containerTagName;
 /**
  * The CSS class for the widget container
  */
+public $containerCssClass;
+```
+{% endhint %}
+
+{% hint style="success" %}
+```php
+public $containerTagName;
 public $containerCssClass;
 ```
 {% endhint %}

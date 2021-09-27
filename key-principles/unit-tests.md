@@ -10,30 +10,21 @@ Test code should be maintained to the same standards of quality as their product
 
 Readability is even more important in unit tests than it is in production code.
 
-{% hint style="success" %}
-**`function testValidateReturnsFalseIfEmployeeIdIsMissing()`**
+{% hint style="danger" %}
+```php
+function testValidate()
+```
 {% endhint %}
 
-{% hint style="danger" %}
-**`function testValidate()`**
+{% hint style="success" %}
+```php
+function testValidateReturnsFalseIfEmployeeIdIsMissing()
+```
 {% endhint %}
 
 ## Use single concept per test
 
 The number of asserts in a test ought to be minimized. Test a single concept in each test function.
-
-{% hint style="success" %}
-```php
-function testValidateReturnsFalseIfEmployeeIdIsMissing()  
-{  
-    $form = new Form();  
-
-    $model = new Whitelist();  
-    $model->setAttributes($form->get('noEmployeeId'));  
-    $this->assertFalse($model->validate());  
-}
-```
-{% endhint %}
 
 {% hint style="danger" %}
 ```php
@@ -52,6 +43,19 @@ function testValidate()
     $model = new Whitelist();  
     $model->setAttributes($form->get('validForm'));  
     $this->assertTrue($model->validate());  
+}
+```
+{% endhint %}
+
+{% hint style="success" %}
+```php
+function testValidateReturnsFalseIfEmployeeIdIsMissing()  
+{  
+    $form = new Form();  
+
+    $model = new Whitelist();  
+    $model->setAttributes($form->get('noEmployeeId'));  
+    $this->assertFalse($model->validate());  
 }
 ```
 {% endhint %}

@@ -31,23 +31,6 @@ file_put_contents($uploadDirectory.'/'.$filename, $content));
 ```
 {% endhint %}
 
-## There is no need for attributions and journal comments
-
-Nowadays we have source code control systems that does it for us.
-
-{% hint style="danger" %}
-```php
-/**
- * 2016-03-19
- * New Method {@link  getReturnUrlRoute()}
- * New Method {@link  getReturn2Url()}
- * Updated Method {@link  getReturnUrl()}
- *
- * @author Erik Uus <erik.uus@gmail.com>
- */
-```
-{% endhint %}
-
 ## Give up mandated comments
 
 It is just plain silly to have a rule that says that every function and variable must have a comment. Comments like this just clutter up the code.
@@ -77,8 +60,38 @@ Noise comments restate the obvious and provide no new information.
  */
 public function isAutoRequest()
 {
-    return isset($_REQUEST['VK_AUTO']) && $_REQUEST['VK_AUTO']=='Y';
+    return isset($_REQUEST['VK_AUTO']) && $_REQUEST['VK_AUTO'] == 'Y';
 }
+```
+{% endhint %}
+
+## Avoid closing brace comments
+
+If you find yourself wanting to mark your closing braces, try to shorten your functions instead.
+
+{% hint style="danger" %}
+```php
+		$newline .= $c;
+	} // end of for
+	$output .= $newline . $eol;
+} // end of while
+return $output;
+```
+{% endhint %}
+
+## Avoid position markers
+
+There are rare times when they make sense, but in general they are clutter that should be eliminated.
+
+{% hint style="danger" %}
+```php
+/////////////////////////////////////////////////
+// PROPERTIES, PRIVATE AND PROTECTED
+/////////////////////////////////////////////////
+
+private $smtp_conn;
+private $error;
+private $helo_rply;
 ```
 {% endhint %}
 
@@ -100,20 +113,34 @@ It makes the comments hard to read in the one place where they should be easy to
 ```
 {% endhint %}
 
-## Avoid position markers
+## There is no need for attributions and journal comments
 
-There are rare times when they make sense, but in general they are clutter that should be eliminated.
+Nowadays we have source code control systems that does it for us.
 
 {% hint style="danger" %}
-**`// Actions //////////////////////////////////`**
+```php
+/**
+ * 2016-03-19
+ * New Method {@link  getReturnUrlRoute()}
+ * New Method {@link  getReturn2Url()}
+ * Updated Method {@link  getReturnUrl()}
+ *
+ * @author Erik Uus <erik.uus@gmail.com>
+ */
+```
 {% endhint %}
 
-## Avoid closing brace comments
+## Don't give too much information
 
-If you find yourself wanting to mark your closing braces, try to shorten your functions instead.
+Don’t put interesting historical discussions or irrelevant descriptions of details into your comments.
 
 {% hint style="danger" %}
-**`} // while`**
+```php
+// The encoding process represents 24-bit groups of input bits as
+// output strings of 4 encoded characters. Proceeding from left to right
+// a 24-bit input group is formed by concatenating 3 8-bit input groups.
+// These 24 bits are then treated as 4 concatenated 6-bit groups ...`**
+```
 {% endhint %}
 
 ## Don’t offer systemwide information
@@ -123,12 +150,3 @@ If you must write a comment, then make sure it describes the code it appears nea
 {% hint style="danger" %}
 **`// Port on which app would run defaults to 8082`**
 {% endhint %}
-
-## Don't give too much information
-
-Don’t put interesting historical discussions or irrelevant descriptions of details into your comments.
-
-{% hint style="danger" %}
-**`// The encoding process represents 24-bit groups of input bits as` `// output strings of 4 encoded characters. Proceeding from left to right,` `// a 24-bit input group is formed by concatenating 3 8-bit input groups.` `// These 24 bits are then treated as 4 concatenated 6-bit groups ...`**
-{% endhint %}
-
