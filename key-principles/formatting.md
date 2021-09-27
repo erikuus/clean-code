@@ -56,7 +56,7 @@ If one function calls another, they should be vertically close, and the caller s
 public function getTypeLabel($type)
 {
     $options = $this->getTypeOptions();
-    return isset($options[$type]) ? $options[$type] : "unknown ({$type})";
+    return isset($options[$type]) ? $options[$type] : null;
 }
 
 public function getTypeOptions()
