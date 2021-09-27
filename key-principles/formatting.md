@@ -136,13 +136,14 @@ public static function validate($model, $attributes = null)
 The factors have no white space between them because they are high precedence. The terms are separated by white space because addition and subtraction are lower precedence.
 
 {% hint style="success" %}
-`return $actualPrice - ($actualPrice*($discount/100));`
+**`return $actualPrice - ($actualPrice*($discount/100));`**
 {% endhint %}
 
 {% hint style="danger" %}
-`return $actualPrice-($actualPrice*($discount/100))`;
+**`return $actualPrice-($actualPrice*($discount/100))`;**
 {% endhint %}
 
 {% hint style="danger" %}
-`return $actualPrice - ($actualPrice * ($discount / 100))`;
+**`return $actualPrice - ($actualPrice * ($discount / 100))`;**
 {% endhint %}
+
