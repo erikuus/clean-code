@@ -26,11 +26,7 @@ try {
 } catch (PortDeviceFailure $e) {  
     log('Port device failure', $e->getMessage());  
 }
-```
-{% endhint %}
 
-{% hint style="success" %}
-```php
 class LocalPort   
 {   
     private $port;  
