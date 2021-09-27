@@ -5,7 +5,7 @@
 We can simplify our code considerably by wrapping the API that we are calling and making sure that it returns a common exception type.
 
 {% hint style="danger" %}
-```
+```php
 try {   
     $port->open();   
 } catch (DeviceResponseException $e) {   
@@ -19,7 +19,7 @@ try {
 {% endhint %}
 
 {% hint style="success" %}
-```
+```php
 try {  
     $localPort = new LocalPort($port);      
     $localPort->open();  
@@ -30,7 +30,7 @@ try {
 {% endhint %}
 
 {% hint style="success" %}
-```
+```php
 class LocalPort   
 {   
     private $port;  
