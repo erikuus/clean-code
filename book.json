@@ -1,0 +1,9 @@
+{
+    "styles": {
+        "website": "styles/custom.css",
+        "ebook": "styles/custom.css",
+        "pdf": "styles/custom.css",
+        "mobi": "styles/custom.css",
+        "epub": "styles/custom.css"
+    }
+}
