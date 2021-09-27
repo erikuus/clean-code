@@ -71,9 +71,9 @@ If you find yourself wanting to mark your closing braces, try to shorten your fu
 
 {% hint style="danger" %}
 ```php
-		$newline .= $c;
-	} // end of for
-	$output .= $newline . $eol;
+        $newline .= $c;
+    } // end of for
+    $output .= $newline . $eol;
 } // end of while
 return $output;
 ```
@@ -139,7 +139,7 @@ Don’t put interesting historical discussions or irrelevant descriptions of det
 // The encoding process represents 24-bit groups of input bits as
 // output strings of 4 encoded characters. Proceeding from left to right
 // a 24-bit input group is formed by concatenating 3 8-bit input groups.
-// These 24 bits are then treated as 4 concatenated 6-bit groups ...`**
+// These 24 bits are then treated as 4 concatenated 6-bit groups ...
 ```
 {% endhint %}
 
@@ -148,5 +148,10 @@ Don’t put interesting historical discussions or irrelevant descriptions of det
 If you must write a comment, then make sure it describes the code it appears near.
 
 {% hint style="danger" %}
-**`// Port on which app would run defaults to 8082`**
+```php
+// Port on which app would run defaults to 8082
+```
 {% endhint %}
+
+**\`\`**
+
