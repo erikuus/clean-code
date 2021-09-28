@@ -6,11 +6,11 @@ Functions should hardly ever be 20 lines long
 
 {% hint style="success" %}
 ```php
-public function getPaginator(Conference $conference, int $offset): Paginator
+public function getPaginator(Article $article, int $offset): Paginator
 {
     $query = $this->createQueryBuilder('c')
-        ->andWhere('c.conference = :conference')
-        ->setParameter('conference', $conference)
+        ->andWhere('c.article = :article')
+        ->setParameter('article', $article)
         ->orderBy('c.createdAt', 'DESC')
         ->setMaxResults(self::PAGINATOR_PER_PAGE)
         ->setFirstResult($offset)
@@ -118,6 +118,10 @@ Don’t be afraid to make a name long. A long descriptive name is better than a 
 
 The ideal number of arguments for a function is zero. Three arguments should be avoided where possible.
 
+{% hint style="info" %}
+Arguments are even harder from a testing point of view. Imagine the difficulty of writing all the test cases to ensure that all the various combinations of arguments work properly.
+{% endhint %}
+
 {% hint style="danger" %}
 ```php
 
@@ -128,10 +132,6 @@ The ideal number of arguments for a function is zero. Three arguments should be 
 ```php
 
 ```
-{% endhint %}
-
-{% hint style="info" %}
-Arguments are even harder from a testing point of view. Imagine the difficulty of writing all the test cases to ensure that all the various combinations of arguments work properly.
 {% endhint %}
 
 ## Avoid flag arguments
@@ -180,30 +180,30 @@ Returning error codes from command functions leads to deeply nested structures.
 ```php
 public function run()
 {
-        $jsonData = Yii::$app->securityManager->decrypt($_POST['data']);
+    $jsonData = Yii::$app->securityManager->decrypt($_POST['data']);
 
-        $identity = new UserIdentity();
-        $identity->authenticate($jsonData, $this->authOptions);
+    $identity = new UserIdentity();
+    $identity->authenticate($jsonData, $this->authOptions);
 
-        if ($identity->errorCode == UserIdentity::ERROR_NONE) {
-            Yii::$app->user->login($identity->getUser());
-            $this->controller->redirect($this->redirectUrl);
-        } elseif ($identity->errorCode == UserIdentity::ERROR_UNAUTHORIZED) {
-            throw new ForbiddenHttpException();
-        } else {
-            switch ($identity->errorCode) {
-                case UserIdentity::ERROR_INVALID_DATA:
-                    Yii::error('Invalid VAU login request');
-                    break;
-                case UserIdentity::ERROR_EXPIRED_DATA:
-                    Yii::error('Expired VAU login request');
-                    break;
-                case UserIdentity::ERROR_SYNC_DATA:
-                    Yii::error('Failed VAU user data sync');
-                    break;
-            }
-            throw new BadRequestHttpException();
+    if ($identity->errorCode == UserIdentity::ERROR_NONE) {
+        Yii::$app->user->login($identity->getUser());
+        $this->controller->redirect($this->redirectUrl);
+    } elseif ($identity->errorCode == UserIdentity::ERROR_UNAUTHORIZED) {
+        throw new ForbiddenHttpException();
+    } else {
+        switch ($identity->errorCode) {
+            case UserIdentity::ERROR_INVALID_DATA:
+                Yii::error('Invalid VAU login request');
+                break;
+            case UserIdentity::ERROR_EXPIRED_DATA:
+                Yii::error('Expired VAU login request');
+                break;
+            case UserIdentity::ERROR_SYNC_DATA:
+                Yii::error('Failed VAU user data sync');
+                break;
         }
+        throw new BadRequestHttpException();
+    }
 }
 ```
 {% endhint %}
