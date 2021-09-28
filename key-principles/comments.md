@@ -152,6 +152,3 @@ If you must write a comment, then make sure it describes the code it appears nea
 // Port on which app would run defaults to 8082
 ```
 {% endhint %}
-
-**\`\`**
-
