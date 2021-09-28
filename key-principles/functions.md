@@ -6,7 +6,7 @@ Functions should hardly ever be 20 lines long
 
 {% hint style="success" %}
 ```php
-public function getCommentPaginator(Conference $conference, int $offset): Paginator
+public function getPaginator(Conference $conference, int $offset): Paginator
 {
     $query = $this->createQueryBuilder('c')
         ->andWhere('c.conference = :conference')
@@ -85,7 +85,7 @@ protected function loadModel()
     }
 
     if ($model === null) {
-        throw new CHttpException(404,'The requested page does not exist.');
+        throw new CHttpException(404);
     } else {
         return $model;
     }
@@ -180,29 +180,29 @@ Returning error codes from command functions leads to deeply nested structures.
 ```php
 public function run()
 {
-        $jsonData = Yii::$app->vauSecurityManager->decrypt($_POST['data']);
+        $jsonData = Yii::$app->securityManager->decrypt($_POST['data']);
 
-        $identity = new VauUserIdentity();
+        $identity = new UserIdentity();
         $identity->authenticate($jsonData, $this->authOptions);
 
-        if ($identity->errorCode == VauUserIdentity::ERROR_NONE) {
+        if ($identity->errorCode == UserIdentity::ERROR_NONE) {
             Yii::$app->user->login($identity->getUser());
             $this->controller->redirect($this->redirectUrl);
-        } elseif ($identity->errorCode == VauUserIdentity::ERROR_UNAUTHORIZED) {
-            throw new ForbiddenHttpException('You do not have the proper credential to access this page.');
+        } elseif ($identity->errorCode == UserIdentity::ERROR_UNAUTHORIZED) {
+            throw new ForbiddenHttpException();
         } else {
             switch ($identity->errorCode) {
-                case VauUserIdentity::ERROR_INVALID_DATA:
+                case UserIdentity::ERROR_INVALID_DATA:
                     Yii::error('Invalid VAU login request');
                     break;
-                case VauUserIdentity::ERROR_EXPIRED_DATA:
+                case UserIdentity::ERROR_EXPIRED_DATA:
                     Yii::error('Expired VAU login request');
                     break;
-                case VauUserIdentity::ERROR_SYNC_DATA:
+                case UserIdentity::ERROR_SYNC_DATA:
                     Yii::error('Failed VAU user data sync');
                     break;
             }
-            throw new BadRequestHttpException('Bad request. Please do not repeat this request again.');
+            throw new BadRequestHttpException();
         }
 }
 ```
@@ -215,16 +215,16 @@ If you use exceptions instead of returned error codes, then the error processing
 public function run()
 {
     try {
-        $jsonData = Yii::$app->vauSecurityManager->decrypt($_POST['data']);
-        $identity = new VauUserIdentity();
+        $jsonData = Yii::$app->securityManager->decrypt($_POST['data']);
+        $identity = new UserIdentity();
         $identity->authenticate($jsonData, $this->authOptions);
         Yii::$app->user->login($identity->getUser());
         $this->controller->redirect($this->redirectUrl);
     } catch (VauAccessDeniedException $e) {
-        throw new ForbiddenHttpException('You do not have the proper credential to access this page.');        
+        throw new ForbiddenHttpException();        
     } catch (\Exception $e) {
         Yii::error($e->getMessage());
-        throw new BadRequestHttpException('Bad request. Please do not repeat this request again.');
+        throw new BadRequestHttpException();
     }
 }
 ```
@@ -238,16 +238,16 @@ If the keyword try exists in a function, it should be the very first word in the
 ```php
 public function run()
 {
-    $jsonData = Yii::$app->vauSecurityManager->decrypt($_POST['data']);
-    $identity = new VauUserIdentity();
+    $jsonData = Yii::$app->securityManager->decrypt($_POST['data']);
+    $identity = new UserIdentity();
 
     try {
         $identity->authenticate($jsonData, $this->authOptions);
     } catch (VauAccessDeniedException $e) {
-        throw new ForbiddenHttpException('You do not have the proper credential to access this page.');        
+        throw new ForbiddenHttpException();        
     } catch (\Exception $e) {
         Yii::error($e->getMessage());
-        throw new BadRequestHttpException('Bad request. Please do not repeat this request again.');
+        throw new BadRequestHttpException();
     }
 
     Yii::$app->user->login($identity->getUser());
@@ -261,16 +261,16 @@ public function run()
 public function run()
 {
     try {
-        $jsonData = Yii::$app->vauSecurityManager->decrypt($_POST['data']);
-        $identity = new VauUserIdentity();
+        $jsonData = Yii::$app->securityManager->decrypt($_POST['data']);
+        $identity = new UserIdentity();
         $identity->authenticate($jsonData, $this->authOptions);
         Yii::$app->user->login($identity->getUser());
         $this->controller->redirect($this->redirectUrl);
     } catch (VauAccessDeniedException $e) {
-        throw new ForbiddenHttpException('You do not have the proper credential to access this page.');        
+        throw new ForbiddenHttpException();        
     } catch (\Exception $e) {
         Yii::error($e->getMessage());
-        throw new BadRequestHttpException('Bad request. Please do not repeat this request again.');
+        throw new BadRequestHttpException();
     }
 }
 ```
