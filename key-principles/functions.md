@@ -24,16 +24,59 @@ public function getPaginator(Article $article, int $offset): Paginator
 
 ## Functions should do one thing
 
-If a function does only those steps that are one level below the stated name of the function, then the function is doing one thing. Function is doing more than "one thing" if you can extract another function from it with a name that is not merely a restatement of its implementation.
+Function is doing more than "one thing" if you can extract another function from it with a name that is not merely a restatement of its implementation.
 
 {% hint style="danger" %}
 ```php
+public function authenticate($data, $options)
+{
+    $user = User::findOne([
+        $options['id'] => $data['id']
+    ]);
 
+    if ($user === null) {
+        if ($options['enableCreate']) {
+            $user = new User();
+            foreach ($options['attributes'] as $key => $attribute) {
+                $user->{$attribute} = $data[$key];
+            }
+            if (!$user->save()) {
+                throw new SaveFailedException();
+            }
+        } else {
+            throw new AccessDeniedException();
+        }
+    } elseif ($options['enableUpdate']) {
+        foreach ($options['attributes'] as $key => $attribute) {
+            $user->{$attribute} = $data[$key];
+        }
+        if (!$user->save()) {
+            throw new SaveFailedException();
+        }
+    }
+    $this->setUser($user);
+}
 ```
 {% endhint %}
 
+If a function does only those steps that are one level below the stated name of the function, then the function is doing one thing.
+
 {% hint style="success" %}
 ```php
+public function authenticate($data, $options)
+{
+    $user = $this->findUser($data, $options);
+    if ($user === null) {
+        if ($options['enableCreate']) {
+            $user = $this->createUser($data, $options);
+        } else {
+            throw new AccessDeniedException();
+        }
+    } elseif ($options['enableUpdate']) {
+        $user = $this->updateUser($user, $data, $options);
+    }
+    $this->setUser($user);
+}
 
 ```
 {% endhint %}
@@ -104,13 +147,13 @@ Don’t be afraid to make a name long. A long descriptive name is better than a 
 
 {% hint style="danger" %}
 ```php
-
+public function createIALOrder()
 ```
 {% endhint %}
 
 {% hint style="success" %}
 ```php
-
+public function createInterArchivalLoanOrder()
 ```
 {% endhint %}
 
@@ -124,13 +167,7 @@ Arguments are even harder from a testing point of view. Imagine the difficulty o
 
 {% hint style="danger" %}
 ```php
-
-```
-{% endhint %}
-
-{% hint style="success" %}
-```php
-
+public function createApplication($orderId=null, $batchIds=null, $token=null)
 ```
 {% endhint %}
 
@@ -162,13 +199,22 @@ Functions should either do something or answer something, but not both.
 
 {% hint style="danger" %}
 ```php
-
+public function calculateProduct(Product $product): float
+{
+    $taxes = $this->calculateTaxes($product);
+    $product->setTaxes($taxes);
+    return $taxes;
+}
 ```
 {% endhint %}
 
 {% hint style="success" %}
 ```php
-
+public function calculateProduct(Product $product): void
+{
+    $taxes = $this->calculateTaxes($product);
+    $product->setTaxes($taxes);
+}
 ```
 {% endhint %}
 
