@@ -81,20 +81,8 @@ public function authenticate($data, $options)
 ```
 {% endhint %}
 
-## Avoid nested structures
-
-The blocks within if statements, else statements, while statements should be one line long. That line can be a function call.
-
-{% hint style="danger" %}
-```php
-
-```
-{% endhint %}
-
-{% hint style="success" %}
-```php
-
-```
+{% hint style="info" %}
+Avoid nested structures. The blocks within if statements, else statements, while statements should ideally be one line long. That line can be a function call.
 {% endhint %}
 
 ## Follow the stepdown rule
@@ -161,19 +149,19 @@ public function createInterArchivalLoanOrder()
 
 The ideal number of arguments for a function is zero. Three arguments should be avoided where possible.
 
+{% hint style="danger" %}
+```php
+public function createApplication($order=null, $csv=null, $token=null)
+```
+{% endhint %}
+
 {% hint style="info" %}
 Arguments are even harder from a testing point of view. Imagine the difficulty of writing all the test cases to ensure that all the various combinations of arguments work properly.
 {% endhint %}
 
-{% hint style="danger" %}
-```php
-public function createApplication($orderId=null, $batchIds=null, $token=null)
-```
-{% endhint %}
-
 ## Avoid flag arguments
 
-Function does more than one thing. It does one thing if the flag is true and another if the flag is false!
+Function with flag argument does more than one thing. It does one thing if the flag is true and another if the flag is false!
 
 {% hint style="success" %}
 ```php
@@ -201,7 +189,7 @@ Functions should either do something or answer something, but not both.
 ```php
 public function calculateProduct(Product $product): float
 {
-    $taxes = $this->calculateTaxes($product);
+    $taxes = $this->taxCalculator->calculate($product);
     $product->setTaxes($taxes);
     return $taxes;
 }
@@ -212,7 +200,7 @@ public function calculateProduct(Product $product): float
 ```php
 public function calculateProduct(Product $product): void
 {
-    $taxes = $this->calculateTaxes($product);
+    $taxes = $this->taxCalculator->calculateTaxes($product);
     $product->setTaxes($taxes);
 }
 ```
