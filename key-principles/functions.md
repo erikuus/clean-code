@@ -28,7 +28,49 @@ Function is doing more than "one thing" if you can extract another function from
 
 {% hint style="danger" %}
 ```php
-public function authenticate($data, $options)
+public function pay(): void
+{
+    foreach (Employee::findAll() as $employee) {
+        if ($employee->isPayday()) {
+            $pay = $employee->calculatePay();
+            $employee->deliverPay($pay);
+        }
+    }
+}
+```
+{% endhint %}
+
+{% hint style="success" %}
+```php
+public function pay(): void
+{
+    for (Employee::findAll() as $employee) {
+        $this->payIfNecessary($employee);
+    }
+}
+
+private function payIfNecessary(Employee $employee): void
+{
+    if ($employee->isPayday())
+        $this->calculateAndDeliverPay($employee);
+}
+
+private function calculateAndDeliverPay(Employee $employee): void
+{
+    $pay = $employee->calculatePay();
+    $employee->deliverPay($pay);
+}
+
+```
+{% endhint %}
+
+## Avoid nested structures.
+
+The blocks within if statements, else statements, while statements should ideally be one line long. That line can be a function call.
+
+{% hint style="danger" %}
+```php
+public function authenticate(array $data, array $options): void
 {
     $user = User::findOne([
         $options['id'] => $data['id']
@@ -59,11 +101,9 @@ public function authenticate($data, $options)
 ```
 {% endhint %}
 
-If a function does only those steps that are one level below the stated name of the function, then the function is doing one thing.
-
 {% hint style="success" %}
 ```php
-public function authenticate($data, $options)
+public function authenticate(array $data, array $options): void
 {
     $user = $this->findUser($data, $options);
     if ($user === null) {
@@ -77,12 +117,7 @@ public function authenticate($data, $options)
     }
     $this->setUser($user);
 }
-
 ```
-{% endhint %}
-
-{% hint style="info" %}
-Avoid nested structures. The blocks within if statements, else statements, while statements should ideally be one line long. That line can be a function call.
 {% endhint %}
 
 ## Follow the stepdown rule
@@ -91,29 +126,20 @@ We want every function to be followed by those at the next level of abstraction 
 
 {% hint style="success" %}
 ```php
-public function run()
+public function move(int $id, string $direction): void
 {
-    if (Yii::app()->request->isPostRequest) {
-        $model = $this->loadModel();
-        $move = Yii::app()->request->getQuery('move');
+    $model = $this->loadModel($id);
 
-        if ($move == 'up') {
-            $model->moveUp();
-        } elseif ($move == 'down') {
-            $model->moveDown();
-        }
-    } else {
-        throw new CHttpException(400);
+    if ($direction == 'up') {
+        $model->moveUp();
+    } elseif ($direction == 'down') {
+        $model->moveDown();
     }
 }
 
-protected function loadModel()
+protected function loadModel(int $id): CActiveRecord
 {
-    $model = null;
-
-    if (isset($_GET['id'])) {
-        $model = $this->getModel()->findbyPk($_GET['id']);
-    }
+    $model = $this->getModel()->findbyPk($id);
 
     if ($model === null) {
         throw new CHttpException(404);
@@ -122,7 +148,7 @@ protected function loadModel()
     }
 }
 
-protected function getModel()
+protected function getModel(): CActiveRecord
 {
     return CActiveRecord::model($this->modelName);
 }
@@ -135,13 +161,13 @@ Don’t be afraid to make a name long. A long descriptive name is better than a 
 
 {% hint style="danger" %}
 ```php
-public function createIALOrder()
+public function createIALOrder(): void
 ```
 {% endhint %}
 
 {% hint style="success" %}
 ```php
-public function createInterArchivalLoanOrder()
+public function createInterArchivalLoanOrder(): void
 ```
 {% endhint %}
 
@@ -151,7 +177,7 @@ The ideal number of arguments for a function is zero. Three arguments should be 
 
 {% hint style="danger" %}
 ```php
-public function createApplication($order=null, $csv=null, $token=null)
+public function create(int $id=null, string $csv=null, string $token=null): void
 ```
 {% endhint %}
 
@@ -163,8 +189,28 @@ Arguments are even harder from a testing point of view. Imagine the difficulty o
 
 Function with flag argument does more than one thing. It does one thing if the flag is true and another if the flag is false!
 
+{% hint style="danger" %}
+```php
+public function checkRoom(array $rooms, bool $in = true): bool
+{
+    return $in ?
+        in_array($this->room, $rooms) :
+        !in_array($this->room, $rooms);
+}
+```
+{% endhint %}
+
 {% hint style="success" %}
 ```php
+public function isInOneOfRooms(array $rooms): bool
+{
+    return in_array($this->room, $rooms);
+}
+
+public function isNotInAnyRooms(array $rooms): bool
+{
+    return !in_array($this->room, $rooms);
+}
 
 ```
 {% endhint %}
@@ -175,7 +221,7 @@ The side effect is the call to session_start(). The checkPassword function, by i
 
 {% hint style="danger" %}
 ```php
-public function checkPassword($username, $password)
+public function checkPassword(string $username, string $password): bool
 {
     session_start();
 ```
@@ -200,7 +246,7 @@ public function calculateProduct(Product $product): float
 ```php
 public function calculateProduct(Product $product): void
 {
-    $taxes = $this->taxCalculator->calculateTaxes($product);
+    $taxes = $this->taxCalculator->calculate($product);
     $product->setTaxes($taxes);
 }
 ```
@@ -212,7 +258,7 @@ Returning error codes from command functions leads to deeply nested structures.
 
 {% hint style="danger" %}
 ```php
-public function run()
+public function remoteLogin(): void
 {
     $jsonData = Yii::$app->securityManager->decrypt($_POST['data']);
 
@@ -246,7 +292,7 @@ If you use exceptions instead of returned error codes, then the error processing
 
 {% hint style="success" %}
 ```php
-public function run()
+public function remoteLogin(): void
 {
     try {
         $jsonData = Yii::$app->securityManager->decrypt($_POST['data']);
@@ -270,7 +316,7 @@ If the keyword try exists in a function, it should be the very first word in the
 
 {% hint style="danger" %}
 ```php
-public function run()
+public function remoteLogin(): void
 {
     $jsonData = Yii::$app->securityManager->decrypt($_POST['data']);
     $identity = new UserIdentity();
@@ -292,7 +338,7 @@ public function run()
 
 {% hint style="success" %}
 ```php
-public function run()
+public function remoteLogin(): void
 {
     try {
         $jsonData = Yii::$app->securityManager->decrypt($_POST['data']);
@@ -315,6 +361,4 @@ public function run()
 > When I write functions, they come out long and complicated. But I also have unit tests that cover every one of those clumsy lines of code. So then I massage and refine that code, splitting out functions, changing names, eliminating duplication.
 >
 > — Robert C. Martin
-
-
 

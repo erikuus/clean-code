@@ -129,3 +129,12 @@ class WikiPage
 class Account`**
 {% endhint %}
 
+## Avoid words (in the name of a class)
+
+{% hint style="danger" %}
+**`Manager
+Processor
+Data
+Info`**
+{% endhint %}
+
