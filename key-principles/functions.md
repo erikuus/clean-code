@@ -60,7 +60,6 @@ private function calculateAndDeliverPay(Employee $employee): void
     $pay = $employee->calculatePay();
     $employee->deliverPay($pay);
 }
-
 ```
 {% endhint %}
 
@@ -211,13 +210,12 @@ public function isNotInAnyRooms(array $rooms): bool
 {
     return !in_array($this->room, $rooms);
 }
-
 ```
 {% endhint %}
 
 ## Have No Side Effects
 
-The side effect is the call to session_start(). The checkPassword function, by its name, says that it checks the password. The name does not imply that it initializes the session.
+The side effect is the call to session\_start\(\). The checkPassword function, by its name, says that it checks the password. The name does not imply that it initializes the session.
 
 {% hint style="danger" %}
 ```php
