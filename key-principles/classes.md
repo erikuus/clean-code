@@ -9,7 +9,7 @@ Consider a class that compiles and prints a report. Such a class can be changed 
 public interface Report
 {
 	public function compile(): self;
-	public function print(): string;
+	public function printout(): string;
 }
 ```
 {% endhint %}
@@ -37,7 +37,7 @@ public interface Vehicle
 ```
 {% endhint %}
 
-## Classes should be cohesive — cohesion results in many small classes
+## Classes should be cohesive—cohesion results in many small classes
 
 Classes should have a small number of instance variables. The more variables a method manipulates the more cohesive that method is to its class.
 
@@ -62,37 +62,19 @@ The Law of Demeter says that a method *f* of a class *C* should only call the me
 
 {% hint style="success" %}
 ```php
-class UserRepository extends Select\Repository implements IdentityRepositoryInterface
-{
-    public function findByLogin(string $login): ?IdentityInterface
-    {
-        return $this->findIdentityBy('login', $login); // rule 1
-    }
-
-    private function findIdentityBy(string $field, string $value): ?IdentityInterface
-    {
-        return $this->findOne([$field => $value]);
-    }    
-
-    public function findAll(array $scope = [], array $orderBy = []): DataReaderInterface
-    {
-        return new EntityReader($this->select()->where($scope)->orderBy($orderBy)); // rule 2
-    }
-}
-
 class Context
 {
-    private TaxCalculatorStrategy $taxCalculatorStrategy;
+    private TaxCalculator $taxCalculator;
 
-    public function __construct(TaxCalculatorStrategy $taxCalculatorStrategy)
+    public function __construct(TaxCalculator $taxCalculator)
     {
-        $this->taxCalculatorStrategy = $taxCalculatorStrategy;
+        $this->taxCalculatorS = $taxCalculator;
     }
 
     public function calculateProduct(Product $product): void
     {
         
-        $taxes = $this->taxCalculatorStrategy->calculate($product); // rule 4
+        $taxes = $this->taxCalculator->calculate($product); // rule 4
         $product->setTaxes($taxes); // rule 3
     }
 }
@@ -111,7 +93,7 @@ class Comment
     private $author;
     private $text;
     private $createdAt;
-    private $conference;
+    private $article;
 
     public function getId(): ?int
     {
@@ -151,14 +133,14 @@ class Comment
         return $this;
     }
 
-    public function getConference(): ?Conference
+    public function getArticle(): ?Article
     {
-        return $this->conference;
+        return $this->article;
     }
 
-    public function setConference(?Conference $conference): self
+    public function setArticle(?Article $article): self
     {
-        $this->conference = $conference;
+        $this->article = $article;
         return $this;
     }
 }
@@ -167,11 +149,11 @@ class CommentRepository
 {
     public const PAGINATOR_PER_PAGE = 2;
 
-    public function getCommentPaginator(Conference $conference, int $offset): Paginator
+    public function getPaginator(Article $article, int $offset): Paginator
     {
         $query = $this->createQueryBuilder('c')
-            ->andWhere('c.conference = :conference')
-            ->setParameter('conference', $conference)
+            ->andWhere('c.article = :article')
+            ->setParameter('article', $article)
             ->orderBy('c.createdAt', 'DESC')
             ->setMaxResults(self::PAGINATOR_PER_PAGE)
             ->setFirstResult($offset)
