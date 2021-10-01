@@ -58,7 +58,7 @@ Noise comments restate the obvious and provide no new information.
  * Check whether it is automated request
  * @return boolean whether it is automated request
  */
-public function isAutoRequest()
+public function isAutoRequest(): bool
 {
     return isset($_REQUEST['VK_AUTO']) && $_REQUEST['VK_AUTO'] == 'Y';
 }

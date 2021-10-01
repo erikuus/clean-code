@@ -36,7 +36,7 @@ class LocalPort
         $this->port=$port;   
     }  
 
-    public function open()   
+    public function open(): void  
     {   
         try {   
             $this->port->open();   
