@@ -53,13 +53,13 @@ If one function calls another, they should be vertically close, and the caller s
 
 {% hint style="success" %}
 ```php
-public function getTypeLabel($type)
+public function getTypeLabel(int $type): string
 {
     $options = $this->getTypeOptions();
     return isset($options[$type]) ? $options[$type] : null;
 }
 
-public function getTypeOptions()
+public function getTypeOptions(): array
 {
     return [
         self::TYPE_CLIENT => 'Client',
@@ -75,13 +75,13 @@ If a group of functions perform a similar operation, they should be vertically c
 
 {% hint style="success" %}
 ```php
-public function clientToEmployee()
+public function clientToEmployee(): void
 {
     $this->type = self::TYPE_EMPLOYEE;
     $this->update('type');
 }
 
-public function employeeToClient()
+public function employeeToClient(): void
 {
     $this->revokeAll();
     $this->type = self::TYPE_CLIENT;

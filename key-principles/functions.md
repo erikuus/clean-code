@@ -49,13 +49,13 @@ public function pay(): void
     }
 }
 
-private function payIfNecessary(Employee $employee): void
+protected function payIfNecessary(Employee $employee): void
 {
     if ($employee->isPayday())
         $this->calculateAndDeliverPay($employee);
 }
 
-private function calculateAndDeliverPay(Employee $employee): void
+protected function calculateAndDeliverPay(Employee $employee): void
 {
     $pay = $employee->calculatePay();
     $employee->deliverPay($pay);
@@ -161,13 +161,13 @@ Don’t be afraid to make a name long. A long descriptive name is better than a 
 
 {% hint style="danger" %}
 ```php
-public function createIALOrder(): void
+public function createIALOrder()
 ```
 {% endhint %}
 
 {% hint style="success" %}
 ```php
-public function createInterArchivalLoanOrder(): void
+public function createInterArchivalLoanOrder()
 ```
 {% endhint %}
 
@@ -177,7 +177,7 @@ The ideal number of arguments for a function is zero. Three arguments should be 
 
 {% hint style="danger" %}
 ```php
-public function create(int $id=null, string $csv=null, string $token=null): void
+public function create(int $id=null, string $csv=null, string $token=null)
 ```
 {% endhint %}
 
@@ -194,8 +194,7 @@ Function with flag argument does more than one thing. It does one thing if the f
 public function checkRoom(array $rooms, bool $in = true): bool
 {
     return $in ?
-        in_array($this->room, $rooms) :
-        !in_array($this->room, $rooms);
+        in_array($this->room, $rooms) : !in_array($this->room, $rooms);
 }
 ```
 {% endhint %}
@@ -221,7 +220,7 @@ The side effect is the call to session_start(). The checkPassword function, by i
 
 {% hint style="danger" %}
 ```php
-public function checkPassword(string $username, string $password): bool
+public function checkPassword(string $password): bool
 {
     session_start();
 ```
@@ -273,13 +272,13 @@ public function remoteLogin(): void
     } else {
         switch ($identity->errorCode) {
             case UserIdentity::ERROR_INVALID_DATA:
-                Yii::error('Invalid VAU login request');
+                Yii::error('Invalid login request');
                 break;
             case UserIdentity::ERROR_EXPIRED_DATA:
-                Yii::error('Expired VAU login request');
+                Yii::error('Expired login request');
                 break;
             case UserIdentity::ERROR_SYNC_DATA:
-                Yii::error('Failed VAU user data sync');
+                Yii::error('Failed user data sync');
                 break;
         }
         throw new BadRequestHttpException();
