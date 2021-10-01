@@ -173,7 +173,3 @@ Data structure expose their data. Objects expose functions that operate on data.
 
 ## Incorporate new features by extending the class
 
-
-
-
-
