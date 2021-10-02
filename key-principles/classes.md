@@ -6,7 +6,7 @@ Consider a class that compiles and prints a report. Such a class can be changed 
 
 {% hint style="danger" %}
 ```php
-public interface Report
+interface Report
 {
 	public function compile(): self;
 	public function printout(): string;
@@ -20,7 +20,7 @@ Abstraction gives the freedom to change implementation.
 
 {% hint style="danger" %}
 ```php
-public interface Vehicle 
+interface Vehicle 
 {
 	public function getFuelTankCapacityInGallons(): float;
 	public function getGallonsOfGasoline(): float;
@@ -30,7 +30,7 @@ public interface Vehicle
 
 {% hint style="success" %}
 ```php
-public interface Vehicle 
+interface Vehicle 
 {
 	public function getPercentFuelRemaining(): float;
 }
@@ -93,7 +93,7 @@ class Comment
     private $author;
     private $text;
     private $createdAt;
-    private $article;
+    private $image;
 
     public function getId(): ?int
     {
@@ -111,49 +111,18 @@ class Comment
         return $this;
     }
 
-    public function getText(): ?string
-    {
-        return $this->text;
-    }
-
-    public function setText(string $text): self
-    {
-        $this->text = $text;
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-        return $this;
-    }
-
-    public function getArticle(): ?Article
-    {
-        return $this->article;
-    }
-
-    public function setArticle(?Article $article): self
-    {
-        $this->article = $article;
-        return $this;
-    }
+    /* and so on */
 }
 
-class CommentRepository
+class CommentRepository extends ServiceEntityRepository
 {
     public const PAGINATOR_PER_PAGE = 2;
 
-    public function getPaginator(Article $article, int $offset): Paginator
+    public function getPaginator(Image $image, int $offset): Paginator
     {
         $query = $this->createQueryBuilder('c')
-            ->andWhere('c.article = :article')
-            ->setParameter('article', $article)
+            ->andWhere('c.image = :image')
+            ->setParameter('image', $image)
             ->orderBy('c.createdAt', 'DESC')
             ->setMaxResults(self::PAGINATOR_PER_PAGE)
             ->setFirstResult($offset)
@@ -173,3 +142,64 @@ Data structure expose their data. Objects expose functions that operate on data.
 
 ## Incorporate new features by extending the class
 
+Incorporate new features by extending the class, not by making modifications to existing class, to reduce the risk of change.
+
+{% hint style="danger" %}
+```php
+class SqlCommand 
+{
+    protected $tableName;
+    protected $columns;
+
+    public function __construct(string $tableName, array $columns)
+    {
+        $this->tableName = $tableName;
+        $this->columns = $columns;
+    }
+
+    public function create(): string
+    {
+
+    }
+
+    public function select(): string
+    {
+
+    }
+}
+```
+{% endhint %}
+
+{% hint style="success" %}
+```php
+abstract class SqlCommand 
+{
+    protected $tableName;
+    protected $columns;
+
+    public function __construct(string $tableName, array $columns)
+    {
+        $this->tableName = $tableName;
+        $this->columns = $columns;
+    }
+
+    abstract public function generate(): string;
+}
+
+class CreateCommand extends SqlCommand 
+{
+    public function generate(): string
+    {
+
+    }
+}
+
+class SelectCommand extends SqlCommand
+{
+    public function generate(): string
+    {
+        
+    }
+}
+```
+{% endhint %}
