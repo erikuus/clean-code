@@ -39,16 +39,66 @@ interface Vehicle
 
 ## Classes should be cohesive—cohesion results in many small classes
 
-Classes should have a small number of instance variables. The more variables a method manipulates the more cohesive that method is to its class.
+Classes should have a small number of instance variables. The more variables a method manipulates the more cohesive that method is to its class. Try to separate the variables and methods into many small classes such that the classes are more cohesive.
+
+{% hint style="danger" %}
+```php
+class Person
+{
+    public $givenName;
+    public $familyName;
+    public $address1;
+    public $address2;
+    public $city;
+    public $state;
+
+    public static function formatName()
+    {
+        return $this->givenName.' '.$this->familyName;
+    }    
+
+    public static function formatAddress()
+    {
+        return 
+            $this->address1.' '.$this->address2.', '.
+            $this->city.', '.$this->state;   
+    }
+}
+```
+{% endhint %}
 
 {% hint style="success" %}
 ```php
+class Name
+{
+    public $givenName;
+    public $familyName;
 
+    public static function formatName()
+    {
+        return $this->givenName.' '.$this->familyName;
+    }
+}
+
+class Address
+{
+    public $address1;
+    public $address2;
+    public $city;
+    public $state;
+
+    public static function formatAddress()
+    {
+        return 
+            $this->address1.' '.$this->address2.', '.
+            $this->city.', '.$this->state;            
+    }
+}
 ```
 {% endhint %} 
 
 {% hint style="info" %}
-Try to separate the variables and methods into many small classes such that the classes are more cohesive.
+
 {% endhint %}
 
 ## Follow the law of demeter
@@ -83,7 +133,7 @@ class Context
 
 ## Treat the Active Record as a data structure
 
-Create separate objects that contain the business rules.
+Create separate objects that contain the business rules. Data structure expose their data. Objects expose functions that operate on data.
 
 {% hint style="success" %}
 ```php
@@ -134,10 +184,6 @@ class CommentRepository extends ServiceEntityRepository
 }
 
 ```
-{% endhint %} 
-
-{% hint style="info" %}
-Data structure expose their data. Objects expose functions that operate on data.
 {% endhint %}
 
 ## Incorporate new features by extending the class
@@ -157,15 +203,9 @@ class SqlCommand
         $this->columns = $columns;
     }
 
-    public function create(): string
-    {
+    public function insert(): string { }
 
-    }
-
-    public function select(): string
-    {
-
-    }
+    public function select(): string { }
 }
 ```
 {% endhint %}
@@ -186,20 +226,14 @@ abstract class SqlCommand
     abstract public function generate(): string;
 }
 
-class CreateCommand extends SqlCommand 
+class InsertCommand extends SqlCommand 
 {
-    public function generate(): string
-    {
-
-    }
+    public function generate(): string { }
 }
 
 class SelectCommand extends SqlCommand
 {
-    public function generate(): string
-    {
-        
-    }
+    public function generate(): string { }
 }
 ```
 {% endhint %}
