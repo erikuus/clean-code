@@ -51,7 +51,7 @@ class Name
     public $givenName;
     public $familyName;
 
-    public function formatName()
+    public function format()
     {
         return $this->givenName.' '.$this->familyName;
     }
@@ -64,7 +64,7 @@ class Address
     public $city;
     public $state;
 
-    public function formatAddress()
+    public function format()
     {
         return 
             $this->address1.' '.$this->address2.', '.
