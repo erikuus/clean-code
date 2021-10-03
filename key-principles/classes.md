@@ -29,12 +29,12 @@ class Person
     public $city;
     public $state;
 
-    public static function formatName()
+    public function formatName()
     {
         return $this->givenName.' '.$this->familyName;
     }    
 
-    public static function formatAddress()
+    public function formatAddress()
     {
         return 
             $this->address1.' '.$this->address2.', '.
@@ -51,7 +51,7 @@ class Name
     public $givenName;
     public $familyName;
 
-    public static function formatName()
+    public function formatName()
     {
         return $this->givenName.' '.$this->familyName;
     }
@@ -64,7 +64,7 @@ class Address
     public $city;
     public $state;
 
-    public static function formatAddress()
+    public function formatAddress()
     {
         return 
             $this->address1.' '.$this->address2.', '.
