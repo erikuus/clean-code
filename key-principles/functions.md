@@ -6,11 +6,11 @@ Functions should hardly ever be 20 lines long
 
 {% hint style="success" %}
 ```php
-public function getPaginator(Article $article, int $offset): Paginator
+public function getPaginator(Image $image, int $offset): Paginator
 {
     $query = $this->createQueryBuilder('c')
-        ->andWhere('c.article = :article')
-        ->setParameter('article', $article)
+        ->andWhere('c.image = :image')
+        ->setParameter('image', $image)
         ->orderBy('c.createdAt', 'DESC')
         ->setMaxResults(self::PAGINATOR_PER_PAGE)
         ->setFirstResult($offset)
@@ -71,9 +71,7 @@ The blocks within if statements, else statements, while statements should ideall
 ```php
 public function authenticate(array $data, array $options): void
 {
-    $user = User::findOne([
-        $options['id'] => $data['id']
-    ]);
+    $user = $this->findUser($data, $options);
 
     if ($user === null) {
         if ($options['enableCreate']) {
@@ -255,28 +253,28 @@ Returning error codes from command functions leads to deeply nested structures.
 
 {% hint style="danger" %}
 ```php
-public function remoteLogin(): void
+public function remoteLogin(string $data): void
 {
-    $jsonData = Yii::$app->securityManager->decrypt($_POST['data']);
+    $jsonData = $this->decrypt($data);
 
     $identity = new UserIdentity();
     $identity->authenticate($jsonData, $this->authOptions);
 
     if ($identity->errorCode == UserIdentity::ERROR_NONE) {
-        Yii::$app->user->login($identity->getUser());
-        $this->controller->redirect($this->redirectUrl);
+        $this->login($identity->getUser());
+        $this->redirect($this->redirectUrl);
     } elseif ($identity->errorCode == UserIdentity::ERROR_UNAUTHORIZED) {
         throw new ForbiddenHttpException();
     } else {
         switch ($identity->errorCode) {
-            case UserIdentity::ERROR_INVALID_DATA:
-                Yii::error('Invalid login request');
+            case UserIdentity::ERROR_INVALID:
+                $this->error('Invalid login request');
                 break;
-            case UserIdentity::ERROR_EXPIRED_DATA:
-                Yii::error('Expired login request');
+            case UserIdentity::ERROR_EXPIRED:
+                $this->error('Expired login request');
                 break;
-            case UserIdentity::ERROR_SYNC_DATA:
-                Yii::error('Failed user data sync');
+            case UserIdentity::ERROR_SYNC:
+                $this->error('Failed user data sync');
                 break;
         }
         throw new BadRequestHttpException();
@@ -289,18 +287,18 @@ If you use exceptions instead of returned error codes, then the error processing
 
 {% hint style="success" %}
 ```php
-public function remoteLogin(): void
+public function remoteLogin(string $data): void
 {
     try {
-        $jsonData = Yii::$app->securityManager->decrypt($_POST['data']);
+        $jsonData = $this->decrypt($data);
         $identity = new UserIdentity();
         $identity->authenticate($jsonData, $this->authOptions);
-        Yii::$app->user->login($identity->getUser());
-        $this->controller->redirect($this->redirectUrl);
-    } catch (VauAccessDeniedException $e) {
+        $this->login($identity->getUser());
+        $this->redirect($this->redirectUrl);
+    } catch (AccessDeniedException $e) {
         throw new ForbiddenHttpException();        
     } catch (\Exception $e) {
-        Yii::error($e->getMessage());
+        $this->error($e->getMessage());
         throw new BadRequestHttpException();
     }
 }
@@ -313,40 +311,40 @@ If the keyword try exists in a function, it should be the very first word in the
 
 {% hint style="danger" %}
 ```php
-public function remoteLogin(): void
+public function remoteLogin(string $data): void
 {
-    $jsonData = Yii::$app->securityManager->decrypt($_POST['data']);
+    $jsonData = $this->decrypt($data);
     $identity = new UserIdentity();
 
     try {
-        $identity->authenticate($jsonData, $this->authOptions);
-    } catch (VauAccessDeniedException $e) {
+        $identity->authenticate($data, $this->authOptions);
+    } catch (AccessDeniedException $e) {
         throw new ForbiddenHttpException();        
     } catch (\Exception $e) {
-        Yii::error($e->getMessage());
+        $this->error($e->getMessage());
         throw new BadRequestHttpException();
     }
 
-    Yii::$app->user->login($identity->getUser());
-    $this->controller->redirect($this->redirectUrl);    
+    $this->login($identity->getUser());
+    $this->redirect($this->redirectUrl);    
 }
 ```
 {% endhint %}
 
 {% hint style="success" %}
 ```php
-public function remoteLogin(): void
+public function remoteLogin(string $data): void
 {
     try {
-        $jsonData = Yii::$app->securityManager->decrypt($_POST['data']);
+        $jsonData = $this->decrypt($data);
         $identity = new UserIdentity();
         $identity->authenticate($jsonData, $this->authOptions);
-        Yii::$app->user->login($identity->getUser());
-        $this->controller->redirect($this->redirectUrl);
-    } catch (VauAccessDeniedException $e) {
+        $this->login($identity->getUser());
+        $this->redirect($this->redirectUrl);
+    } catch (AccessDeniedException $e) {
         throw new ForbiddenHttpException();        
     } catch (\Exception $e) {
-        Yii::error($e->getMessage());
+        $this->error($e->getMessage());
         throw new BadRequestHttpException();
     }
 }
