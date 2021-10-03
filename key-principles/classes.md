@@ -14,29 +14,6 @@ interface Report
 ```
 {% endhint %}
 
-## Use data abstraction
-
-Abstraction gives the freedom to change implementation.
-
-{% hint style="danger" %}
-```php
-interface Vehicle 
-{
-	public function getFuelTankCapacityInGallons(): float;
-	public function getGallonsOfGasoline(): float;
-}
-```
-{% endhint %}
-
-{% hint style="success" %}
-```php
-interface Vehicle 
-{
-	public function getPercentFuelRemaining(): float;
-}
-```
-{% endhint %}
-
 ## Classes should be cohesive—cohesion results in many small classes
 
 Classes should have a small number of instance variables. The more variables a method manipulates the more cohesive that method is to its class. Try to separate the variables and methods into many small classes such that the classes are more cohesive.
@@ -95,10 +72,6 @@ class Address
     }
 }
 ```
-{% endhint %} 
-
-{% hint style="info" %}
-
 {% endhint %}
 
 ## Follow the law of demeter
@@ -127,6 +100,81 @@ class Context
         $taxes = $this->taxCalculator->calculate($product); // rule 4
         $product->setTaxes($taxes); // rule 3
     }
+}
+```
+{% endhint %}
+
+## Use data abstraction
+
+Abstraction gives the freedom to change implementation.
+
+{% hint style="danger" %}
+```php
+interface Vehicle 
+{
+    public function getFuelTankCapacityInGallons(): float;
+    public function getGallonsOfGasoline(): float;
+}
+```
+{% endhint %}
+
+{% hint style="success" %}
+```php
+interface Vehicle 
+{
+    public function getPercentFuelRemaining(): float;
+}
+```
+{% endhint %}
+
+## Incorporate new features by extending the class
+
+Incorporate new features by extending the class, not by making modifications to existing class, to reduce the risk of change.
+
+{% hint style="danger" %}
+```php
+class SqlCommand 
+{
+    protected $tableName;
+    protected $columns;
+
+    public function __construct(string $tableName, array $columns)
+    {
+        $this->tableName = $tableName;
+        $this->columns = $columns;
+    }
+
+    public function insert(): string { }
+
+    public function select(): string { }
+}
+```
+{% endhint %}
+
+{% hint style="success" %}
+```php
+abstract class SqlCommand 
+{
+    protected $tableName;
+    protected $columns;
+
+    public function __construct(string $tableName, array $columns)
+    {
+        $this->tableName = $tableName;
+        $this->columns = $columns;
+    }
+
+    abstract public function generate(): string;
+}
+
+class InsertCommand extends SqlCommand 
+{
+    public function generate(): string { }
+}
+
+class SelectCommand extends SqlCommand
+{
+    public function generate(): string { }
 }
 ```
 {% endhint %}
@@ -186,54 +234,3 @@ class CommentRepository extends ServiceEntityRepository
 ```
 {% endhint %}
 
-## Incorporate new features by extending the class
-
-Incorporate new features by extending the class, not by making modifications to existing class, to reduce the risk of change.
-
-{% hint style="danger" %}
-```php
-class SqlCommand 
-{
-    protected $tableName;
-    protected $columns;
-
-    public function __construct(string $tableName, array $columns)
-    {
-        $this->tableName = $tableName;
-        $this->columns = $columns;
-    }
-
-    public function insert(): string { }
-
-    public function select(): string { }
-}
-```
-{% endhint %}
-
-{% hint style="success" %}
-```php
-abstract class SqlCommand 
-{
-    protected $tableName;
-    protected $columns;
-
-    public function __construct(string $tableName, array $columns)
-    {
-        $this->tableName = $tableName;
-        $this->columns = $columns;
-    }
-
-    abstract public function generate(): string;
-}
-
-class InsertCommand extends SqlCommand 
-{
-    public function generate(): string { }
-}
-
-class SelectCommand extends SqlCommand
-{
-    public function generate(): string { }
-}
-```
-{% endhint %}
