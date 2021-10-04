@@ -104,7 +104,7 @@ class Context
 
     public function __construct(TaxCalculator $taxCalculator)
     {
-        $this->taxCalculatorS = $taxCalculator;
+        $this->taxCalculator = $taxCalculator;
     }
 
     public function calculateProduct(Product $product): void
