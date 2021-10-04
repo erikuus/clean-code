@@ -56,11 +56,11 @@ class LocalPort
 
 Returning error codes leads to deeply nested structures.
 
-{% page-ref page="functions.md" %}
+[Read more](https://erik-uus.gitbook.io/clean-code/key-principles/functions#prefer-exceptions-to-returning-error-codes)
 
 ## Put all code inside try block
 
 If the keyword try exists in a function, it should be the very first word in the function and there should be nothing after the catch/finally blocks.
 
-{% page-ref page="functions.md" %}
+[Read more](https://erik-uus.gitbook.io/clean-code/key-principles/functions#put-all-code-inside-try-block)
 

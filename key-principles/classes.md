@@ -8,13 +8,13 @@ Consider a class that compiles and prints a report. Such a class can be changed 
 ```php
 interface Report
 {
-	public function compile(): self;
-	public function print(): string;
+    public function compile(): self;
+    public function printout(): string;
 }
 ```
 {% endhint %}
 
-## Classes should be cohesive—cohesion results in many small classes
+## Classes should be cohesive—it results in many small classes
 
 Classes should have a small number of instance variables. The more variables a method manipulates the more cohesive that method is to its class. Try to separate the variables and methods into many small classes such that the classes are more cohesive.
 
@@ -24,8 +24,7 @@ class Person
 {
     public $givenName;
     public $familyName;
-    public $address1;
-    public $address2;
+    public $address;
     public $city;
     public $state;
 
@@ -36,9 +35,7 @@ class Person
 
     public function formatAddress()
     {
-        return 
-            $this->address1.' '.$this->address2.', '.
-            $this->city.', '.$this->state;   
+        return $this->address.', '.$this->city.', '.$this->state;   
     }
 }
 ```
@@ -59,16 +56,13 @@ class Name
 
 class Address
 {
-    public $address1;
-    public $address2;
+    public $address;
     public $city;
     public $state;
 
     public function format()
     {
-        return 
-            $this->address1.' '.$this->address2.', '.
-            $this->city.', '.$this->state;            
+        return $this->address.', '.$this->city.', '.$this->state;       
     }
 }
 ```
@@ -76,12 +70,12 @@ class Address
 
 ## Follow the law of demeter
 
-The Law of Demeter says that a method *f* of a class *C* should only call the methods of these:
+The Law of Demeter says that a method _f_ of a class _C_ should only call the methods of these:
 
-1. *C*
-2. An object created by *f*
-3. An object held in an instance variable of *C*
-4. An object passed as an argument to *f*
+1. _C_
+2. An object created by _f_
+3. An object held in an instance variable of _C_
+4. An object passed as an argument to _f_
 
 {% hint style="success" %}
 ```php
@@ -199,7 +193,7 @@ class SelectCommand extends SqlCommand
 
 ## Treat the Active Record as a data structure
 
-Create separate objects that contain the business rules. Data structure expose their data. Objects expose functions that operate on data.
+Create separate objects that contain the business rules. Data structures expose their data. Objects expose functions that operate on data.
 
 {% hint style="success" %}
 ```php
@@ -248,7 +242,6 @@ class CommentRepository extends ServiceEntityRepository
         return new Paginator($query);
     }
 }
-
 ```
 {% endhint %}
 
