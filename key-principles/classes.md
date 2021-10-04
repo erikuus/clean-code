@@ -68,7 +68,7 @@ class Address
 ```
 {% endhint %}
 
-## Follow the law of demeter
+## Follow the Law of Demeter
 
 The Law of Demeter says that a method _f_ of a class _C_ should only call the methods of these:
 
