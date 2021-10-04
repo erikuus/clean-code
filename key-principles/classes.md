@@ -24,7 +24,7 @@ class Person
 {
     public $givenName;
     public $familyName;
-    public $address;
+    public $street;
     public $city;
     public $state;
 
@@ -35,7 +35,7 @@ class Person
 
     public function formatAddress()
     {
-        return $this->address.', '.$this->city.', '.$this->state;   
+        return $this->street.', '.$this->city.', '.$this->state;   
     }
 }
 ```
@@ -56,13 +56,13 @@ class Name
 
 class Address
 {
-    public $address;
+    public $street;
     public $city;
     public $state;
 
     public function format()
     {
-        return $this->address.', '.$this->city.', '.$this->state;       
+        return $this->street.', '.$this->city.', '.$this->state;       
     }
 }
 ```
