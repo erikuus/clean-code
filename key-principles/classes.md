@@ -24,7 +24,7 @@ class Person
 {
     public $givenName;
     public $familyName;
-    public $address;
+    public $street;
     public $city;
     public $state;
 
@@ -35,7 +35,7 @@ class Person
 
     public function formatAddress()
     {
-        return $this->address.', '.$this->city.', '.$this->state;   
+        return $this->street.', '.$this->city.', '.$this->state;   
     }
 }
 ```
@@ -56,19 +56,19 @@ class Name
 
 class Address
 {
-    public $address;
+    public $street;
     public $city;
     public $state;
 
     public function format()
     {
-        return $this->address.', '.$this->city.', '.$this->state;       
+        return $this->street.', '.$this->city.', '.$this->state;       
     }
 }
 ```
 {% endhint %}
 
-## Follow the law of demeter
+## Follow the Law of Demeter
 
 The Law of Demeter says that a method _f_ of a class _C_ should only call the methods of these:
 
@@ -104,7 +104,7 @@ class Context
 
     public function __construct(TaxCalculator $taxCalculator)
     {
-        $this->taxCalculatorS = $taxCalculator;
+        $this->taxCalculator = $taxCalculator;
     }
 
     public function calculateProduct(Product $product): void
