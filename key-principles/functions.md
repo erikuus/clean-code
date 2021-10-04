@@ -28,9 +28,9 @@ Function is doing more than "one thing" if you can extract another function from
 
 {% hint style="danger" %}
 ```php
-public function pay(): void
+public function pay(EmployeeRepository $employeeRepository): void
 {
-    foreach (Employee::findAll() as $employee) {
+    foreach ($employeeRepository->findAll() as $employee) {
         if ($employee->isPayday()) {
             $pay = $employee->calculatePay();
             $employee->deliverPay($pay);
@@ -42,9 +42,9 @@ public function pay(): void
 
 {% hint style="success" %}
 ```php
-public function pay(): void
+public function pay(EmployeeRepository $employeeRepository): void
 {
-    for (Employee::findAll() as $employee) {
+    for ($employeeRepository->findAll() as $employee) {
         $this->payIfNecessary($employee);
     }
 }
@@ -55,6 +55,36 @@ protected function payIfNecessary(Employee $employee): void
         $this->calculateAndDeliverPay($employee);
 }
 
+protected function calculateAndDeliverPay(Employee $employee): void
+{
+    $pay = $employee->calculatePay();
+    $employee->deliverPay($pay);
+}
+```
+{% endhint %}
+
+## Follow the stepdown rule
+
+We want every function to be followed by those at the next level of abstraction so that we can read code from top to bottom.
+
+{% hint style="success" %}
+```php
+// First level of abstraction
+public function pay(EmployeeRepository $employeeRepository): void
+{
+    for ($employeeRepository->findAll() as $employee) {
+        $this->payIfNecessary($employee);
+    }
+}
+
+// Second level of abstraction
+protected function payIfNecessary(Employee $employee): void
+{
+    if ($employee->isPayday())
+        $this->calculateAndDeliverPay($employee);
+}
+
+// Third level of abstraction
 protected function calculateAndDeliverPay(Employee $employee): void
 {
     $pay = $employee->calculatePay();
@@ -113,41 +143,6 @@ public function authenticate(array $data, array $options): void
         $user = $this->updateUser($user, $data, $options);
     }
     $this->setUser($user);
-}
-```
-{% endhint %}
-
-## Follow the stepdown rule
-
-We want every function to be followed by those at the next level of abstraction so that we can read code from top to bottom.
-
-{% hint style="success" %}
-```php
-public function move(int $id, string $direction): void
-{
-    $model = $this->loadModel($id);
-
-    if ($direction == 'up') {
-        $model->moveUp();
-    } elseif ($direction == 'down') {
-        $model->moveDown();
-    }
-}
-
-protected function loadModel(int $id): CActiveRecord
-{
-    $model = $this->getModel()->findbyPk($id);
-
-    if ($model === null) {
-        throw new CHttpException(404);
-    } else {
-        return $model;
-    }
-}
-
-protected function getModel(): CActiveRecord
-{
-    return CActiveRecord::model($this->modelName);
 }
 ```
 {% endhint %}
@@ -258,7 +253,7 @@ public function remoteLogin(string $data): void
     $jsonData = $this->decrypt($data);
 
     $identity = new UserIdentity();
-    $identity->authenticate($jsonData, $this->authOptions);
+    $identity->authenticate($jsonData);
 
     if ($identity->errorCode == UserIdentity::ERROR_NONE) {
         $this->login($identity->getUser());
@@ -292,7 +287,7 @@ public function remoteLogin(string $data): void
     try {
         $jsonData = $this->decrypt($data);
         $identity = new UserIdentity();
-        $identity->authenticate($jsonData, $this->authOptions);
+        $identity->authenticate($jsonData);
         $this->login($identity->getUser());
         $this->redirect($this->redirectUrl);
     } catch (AccessDeniedException $e) {
@@ -317,7 +312,7 @@ public function remoteLogin(string $data): void
     $identity = new UserIdentity();
 
     try {
-        $identity->authenticate($data, $this->authOptions);
+        $identity->authenticate($jsonData);
     } catch (AccessDeniedException $e) {
         throw new ForbiddenHttpException();        
     } catch (\Exception $e) {
@@ -338,7 +333,7 @@ public function remoteLogin(string $data): void
     try {
         $jsonData = $this->decrypt($data);
         $identity = new UserIdentity();
-        $identity->authenticate($jsonData, $this->authOptions);
+        $identity->authenticate($jsonData);
         $this->login($identity->getUser());
         $this->redirect($this->redirectUrl);
     } catch (AccessDeniedException $e) {

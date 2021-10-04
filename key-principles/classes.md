@@ -9,7 +9,7 @@ Consider a class that compiles and prints a report. Such a class can be changed 
 interface Report
 {
 	public function compile(): self;
-	public function printout(): string;
+	public function print(): string;
 }
 ```
 {% endhint %}
@@ -80,8 +80,27 @@ The Law of Demeter says that a method *f* of a class *C* should only call the me
 
 1. *C*
 2. An object created by *f*
-3. An object passed as an argument to *f*                                             
-4. An object held in an instance variable of *C*
+3. An object held in an instance variable of *C*
+4. An object passed as an argument to *f*
+
+{% hint style="success" %}
+```php
+class CommentRepository extends Repository
+{
+    public function getReader(): DataReaderInterface
+    {
+        $sort = $this->getSort(); // rule 1
+        return (new EntityReader())->withSort($sort); // rule 2
+    }
+
+    private function getSort(): Sort
+    {
+        return Sort::only(['id', 'created_at', 'post_id', 'user_id'])
+            ->withOrder(['id' => 'asc']);
+    }
+}
+```
+{% endhint %}
 
 {% hint style="success" %}
 ```php
@@ -96,9 +115,8 @@ class Context
 
     public function calculateProduct(Product $product): void
     {
-        
-        $taxes = $this->taxCalculator->calculate($product); // rule 4
-        $product->setTaxes($taxes); // rule 3
+        $taxes = $this->taxCalculator->calculate($product); // rule 3
+        $product->setTaxes($taxes); // rule 4
     }
 }
 ```
