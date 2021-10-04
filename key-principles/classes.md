@@ -14,7 +14,7 @@ interface Report
 ```
 {% endhint %}
 
-## Classes should be cohesive—cohesion results in many small classes
+## Classes should be cohesive—it results in many small classes
 
 Classes should have a small number of instance variables. The more variables a method manipulates the more cohesive that method is to its class. Try to separate the variables and methods into many small classes such that the classes are more cohesive.
 
