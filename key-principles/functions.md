@@ -2,7 +2,7 @@
 
 ## Functions should be small
 
-Functions should hardly ever be 20 lines long
+Functions should hardly ever be 20 lines long.
 
 {% hint style="success" %}
 ```php
@@ -183,7 +183,7 @@ Function with flag argument does more than one thing. It does one thing if the f
 
 {% hint style="danger" %}
 ```php
-public function checkRoom(array $rooms, bool $in = true): bool
+public function checkRoom(array $rooms, bool $in): bool
 {
     return $in ?
         in_array($this->room, $rooms) : !in_array($this->room, $rooms);
@@ -302,7 +302,7 @@ public function remoteLogin(string $data): void
 
 ## Put all code inside try block
 
-If the keyword try exists in a function, it should be the very first word in the function and that there should be nothing after the catch/finally blocks.
+If the keyword try exists in a function, it should be the very first word in the function and there should be nothing after the catch/finally blocks.
 
 {% hint style="danger" %}
 ```php
