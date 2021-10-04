@@ -193,7 +193,7 @@ class SelectCommand extends SqlCommand
 
 ## Treat the Active Record as a data structure
 
-Create separate objects that contain the business rules. Data structure expose their data. Objects expose functions that operate on data.
+Create separate objects that contain the business rules. Data structures expose their data. Objects expose functions that operate on data.
 
 {% hint style="success" %}
 ```php
