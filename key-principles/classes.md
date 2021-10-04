@@ -35,7 +35,7 @@ class Person
 
     public function formatAddress()
     {
-        return $this->address.' '.$this->city.', '.$this->state;   
+        return $this->address.', '.$this->city.', '.$this->state;   
     }
 }
 ```
@@ -62,7 +62,7 @@ class Address
 
     public function format()
     {
-        return $this->address.' '.$this->city.', '.$this->state;       
+        return $this->address.', '.$this->city.', '.$this->state;       
     }
 }
 ```
