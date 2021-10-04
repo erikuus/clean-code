@@ -144,5 +144,3 @@ public function calculate(Product $product): float
 ```
 {% endhint %}
 
-
-

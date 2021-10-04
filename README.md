@@ -2,7 +2,7 @@
 
 ## About the gitbook
 
-This is my **summary** of the book "**Clean Code**" by **Robert C. Martin**.
+This is my **summary** of the book [**Clean Code**](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship-ebook-dp-B001GSTOAM/dp/B001GSTOAM/) by **Robert C. Martin**.
 
 In the book Robert C. Martin introduces the **disciplines, techniques, tools, and practices of** **true software craftsmanship**.
 

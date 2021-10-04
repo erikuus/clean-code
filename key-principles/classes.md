@@ -8,8 +8,8 @@ Consider a class that compiles and prints a report. Such a class can be changed 
 ```php
 interface Report
 {
-	public function compile(): self;
-	public function print(): string;
+    public function compile(): self;
+    public function printout(): string;
 }
 ```
 {% endhint %}
@@ -76,12 +76,12 @@ class Address
 
 ## Follow the law of demeter
 
-The Law of Demeter says that a method *f* of a class *C* should only call the methods of these:
+The Law of Demeter says that a method _f_ of a class _C_ should only call the methods of these:
 
-1. *C*
-2. An object created by *f*
-3. An object held in an instance variable of *C*
-4. An object passed as an argument to *f*
+1. _C_
+2. An object created by _f_
+3. An object held in an instance variable of _C_
+4. An object passed as an argument to _f_
 
 {% hint style="success" %}
 ```php
@@ -248,7 +248,6 @@ class CommentRepository extends ServiceEntityRepository
         return new Paginator($query);
     }
 }
-
 ```
 {% endhint %}
 
