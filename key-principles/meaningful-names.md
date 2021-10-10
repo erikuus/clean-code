@@ -92,13 +92,13 @@ If a variable or constant might be seen or used in multiple places in a body of 
 What does add mean? Concate strings? Insert a record in a table? Append a value to the end of an array?
 
 {% hint style="danger" %}
-**`function add($value)`**
+function add($value)
 {% endhint %}
 
 {% hint style="success" %}
-**`function concate($value)  `**\
-**`function insert($value)  `**\
-**`function append($value)`**
+function concate($value)  \
+function insert($value)  \
+function append($value)
 {% endhint %}
 
 ## Use problem domain names
@@ -106,27 +106,27 @@ What does add mean? Concate strings? Insert a record in a table? Append a value 
 What does the term "document" mean in the archives domain? Are photos considered documents?
 
 {% hint style="danger" %}
-**`$document`**
+$document
 {% endhint %}
 
 {% hint style="success" %}
-**`$record`**
+$record
 {% endhint %}
 
 ## Methods should have verb names
 
 {% hint style="success" %}
-**`function postPayment()  `**\
-**`function deletePage()  `**\
-**`function save()`**
+function postPayment()\
+function deletePage()\
+function save()
 {% endhint %}
 
 ## Classes should have noun names
 
 {% hint style="success" %}
-**`class Customer  `**\
-**`class WikiPage  `**\
-**`class Account`**
+class Customer\
+class WikiPage\
+class Account
 {% endhint %}
 
 ## Avoid words (in the name of a class)
