@@ -14,5 +14,4 @@ Please note that I use PHP code to illustrate the key points. The Clean Code boo
 
 ## About the author
 
-{% embed url="https://www.linkedin.com/in/erik-uus-46304258" caption="" %}
-
+[https://www.linkedin.com/in/erik-uus-46304258/](https://www.linkedin.com/in/erik-uus-46304258/)
