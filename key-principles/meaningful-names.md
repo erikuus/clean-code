@@ -17,11 +17,11 @@ $gameBoard
 Of what type is the account list? String? Array of strings? Array of objects?
 
 {% hint style="danger" %}
-**`$accountList`**
+$accountList
 {% endhint %}
 
 {% hint style="success" %}
-**`$accounts`**
+$accounts
 {% endhint %}
 
 ## Avoid similar shapes
@@ -29,8 +29,8 @@ Of what type is the account list? String? Array of strings? Array of objects?
 How long does it take to spot the subtle difference?
 
 {% hint style="danger" %}
-**`class ControllerForEfficientHandlingOfStrings  `**\
-**`class ControllerForEfficientStorageOfStrings`**
+class ControllerForEfficientHandlingOfStrings  \
+class ControllerForEfficientStorageOfStrings
 {% endhint %}
 
 ## Make meaningful distinctions
@@ -38,9 +38,9 @@ How long does it take to spot the subtle difference?
 How do these different names convey different meanings?
 
 {% hint style="danger" %}
-**`class Product  `**\
-**`class ProductInfo  `**\
-**`class ProductData`**
+class Product  \
+class ProductInfo  \
+class ProductData
 {% endhint %}
 
 ## Use pronounceable names
@@ -48,11 +48,11 @@ How do these different names convey different meanings?
 How can you discuss it without sounding like an idiot?
 
 {% hint style="danger" %}
-**`class CstmrRcrd`**
+class CstmrRcrd
 {% endhint %}
 
 {% hint style="success" %}
-**`class Customer`**
+class Customer
 {% endhint %}
 
 ## Add context by using prefixes
@@ -60,11 +60,11 @@ How can you discuss it without sounding like an idiot?
 What does the state represent? Condition or country?
 
 {% hint style="danger" %}
-**`$state`**
+$state
 {% endhint %}
 
 {% hint style="success" %}
-**`$addressState`**
+$addressState
 {% endhint %}
 
 {% hint style="info" %}
@@ -76,11 +76,11 @@ A better solution is to create a class named Address. If you need to differentia
 Is it obvious outside the class body that WD is an acronym for work days per week?
 
 {% hint style="danger" %}
-**`const WD`**
+const WD
 {% endhint %}
 
 {% hint style="success" %}
-**`const WORK_DAYS_PER_WEEK`**
+const WORK_DAYS_PER_WEEK
 {% endhint %}
 
 {% hint style="info" %}
