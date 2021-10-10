@@ -29,7 +29,7 @@ $accounts
 How long does it take to spot the subtle difference?
 
 {% hint style="danger" %}
-class ControllerForEfficientHandlingOfStrings  \
+class ControllerForEfficientHandlingOfStrings\
 class ControllerForEfficientStorageOfStrings
 {% endhint %}
 
@@ -38,8 +38,8 @@ class ControllerForEfficientStorageOfStrings
 How do these different names convey different meanings?
 
 {% hint style="danger" %}
-class Product  \
-class ProductInfo  \
+class Product\
+class ProductInfo\
 class ProductData
 {% endhint %}
 
@@ -96,8 +96,8 @@ function add($value)
 {% endhint %}
 
 {% hint style="success" %}
-function concate($value)  \
-function insert($value)  \
+function concate($value)\
+function insert($value)\
 function append($value)
 {% endhint %}
 
@@ -132,8 +132,8 @@ class Account
 ## Avoid words (in the name of a class)
 
 {% hint style="danger" %}
-**`Manager `**\
-**`Processor `**\
-**`Data `**\
-**`Info`**
+Manager\
+Processor\
+Data\
+Info
 {% endhint %}
