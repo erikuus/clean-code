@@ -5,11 +5,11 @@
 What does the list represent?
 
 {% hint style="danger" %}
-**`$theList`**
+$theList
 {% endhint %}
 
 {% hint style="success" %}
-**`$gameBoard`**
+$gameBoard
 {% endhint %}
 
 ## Avoid disinformation
@@ -29,8 +29,8 @@ Of what type is the account list? String? Array of strings? Array of objects?
 How long does it take to spot the subtle difference?
 
 {% hint style="danger" %}
-**`class ControllerForEfficientHandlingOfStrings    
-class ControllerForEfficientStorageOfStrings`**
+**`class ControllerForEfficientHandlingOfStrings  `**\
+**`class ControllerForEfficientStorageOfStrings`**
 {% endhint %}
 
 ## Make meaningful distinctions
@@ -38,9 +38,9 @@ class ControllerForEfficientStorageOfStrings`**
 How do these different names convey different meanings?
 
 {% hint style="danger" %}
-**`class Product    
-class ProductInfo    
-class ProductData`**
+**`class Product  `**\
+**`class ProductInfo  `**\
+**`class ProductData`**
 {% endhint %}
 
 ## Use pronounceable names
@@ -96,9 +96,9 @@ What does add mean? Concate strings? Insert a record in a table? Append a value 
 {% endhint %}
 
 {% hint style="success" %}
-**`function concate($value)    
-function insert($value)    
-function append($value)`**
+**`function concate($value)  `**\
+**`function insert($value)  `**\
+**`function append($value)`**
 {% endhint %}
 
 ## Use problem domain names
@@ -116,25 +116,24 @@ What does the term "document" mean in the archives domain? Are photos considered
 ## Methods should have verb names
 
 {% hint style="success" %}
-**`function postPayment()    
-function deletePage()    
-function save()`**
+**`function postPayment()  `**\
+**`function deletePage()  `**\
+**`function save()`**
 {% endhint %}
 
 ## Classes should have noun names
 
 {% hint style="success" %}
-**`class Customer    
-class WikiPage    
-class Account`**
+**`class Customer  `**\
+**`class WikiPage  `**\
+**`class Account`**
 {% endhint %}
 
-## Avoid words \(in the name of a class\)
+## Avoid words (in the name of a class)
 
 {% hint style="danger" %}
-**`Manager   
-Processor   
-Data   
-Info`**
+**`Manager `**\
+**`Processor `**\
+**`Data `**\
+**`Info`**
 {% endhint %}
-
