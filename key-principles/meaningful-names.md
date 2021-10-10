@@ -5,11 +5,11 @@
 What does the list represent?
 
 {% hint style="danger" %}
-**`$theList`**
+$theList
 {% endhint %}
 
 {% hint style="success" %}
-**`$gameBoard`**
+$gameBoard
 {% endhint %}
 
 ## Avoid disinformation
@@ -17,11 +17,11 @@ What does the list represent?
 Of what type is the account list? String? Array of strings? Array of objects?
 
 {% hint style="danger" %}
-**`$accountList`**
+$accountList
 {% endhint %}
 
 {% hint style="success" %}
-**`$accounts`**
+$accounts
 {% endhint %}
 
 ## Avoid similar shapes
@@ -29,8 +29,8 @@ Of what type is the account list? String? Array of strings? Array of objects?
 How long does it take to spot the subtle difference?
 
 {% hint style="danger" %}
-**`class ControllerForEfficientHandlingOfStrings    
-class ControllerForEfficientStorageOfStrings`**
+class ControllerForEfficientHandlingOfStrings\
+class ControllerForEfficientStorageOfStrings
 {% endhint %}
 
 ## Make meaningful distinctions
@@ -38,9 +38,9 @@ class ControllerForEfficientStorageOfStrings`**
 How do these different names convey different meanings?
 
 {% hint style="danger" %}
-**`class Product    
-class ProductInfo    
-class ProductData`**
+class Product\
+class ProductInfo\
+class ProductData
 {% endhint %}
 
 ## Use pronounceable names
@@ -48,11 +48,11 @@ class ProductData`**
 How can you discuss it without sounding like an idiot?
 
 {% hint style="danger" %}
-**`class CstmrRcrd`**
+class CstmrRcrd
 {% endhint %}
 
 {% hint style="success" %}
-**`class Customer`**
+class Customer
 {% endhint %}
 
 ## Add context by using prefixes
@@ -60,11 +60,11 @@ How can you discuss it without sounding like an idiot?
 What does the state represent? Condition or country?
 
 {% hint style="danger" %}
-**`$state`**
+$state
 {% endhint %}
 
 {% hint style="success" %}
-**`$addressState`**
+$addressState
 {% endhint %}
 
 {% hint style="info" %}
@@ -76,11 +76,11 @@ A better solution is to create a class named Address. If you need to differentia
 Is it obvious outside the class body that WD is an acronym for work days per week?
 
 {% hint style="danger" %}
-**`const WD`**
+const WD
 {% endhint %}
 
 {% hint style="success" %}
-**`const WORK_DAYS_PER_WEEK`**
+const WORK_DAYS_PER_WEEK
 {% endhint %}
 
 {% hint style="info" %}
@@ -92,13 +92,13 @@ If a variable or constant might be seen or used in multiple places in a body of 
 What does add mean? Concate strings? Insert a record in a table? Append a value to the end of an array?
 
 {% hint style="danger" %}
-**`function add($value)`**
+function add($value)
 {% endhint %}
 
 {% hint style="success" %}
-**`function concate($value)    
-function insert($value)    
-function append($value)`**
+function concate($value)\
+function insert($value)\
+function append($value)
 {% endhint %}
 
 ## Use problem domain names
@@ -106,35 +106,34 @@ function append($value)`**
 What does the term "document" mean in the archives domain? Are photos considered documents?
 
 {% hint style="danger" %}
-**`$document`**
+$document
 {% endhint %}
 
 {% hint style="success" %}
-**`$record`**
+$record
 {% endhint %}
 
 ## Methods should have verb names
 
 {% hint style="success" %}
-**`function postPayment()    
-function deletePage()    
-function save()`**
+function postPayment()\
+function deletePage()\
+function save()
 {% endhint %}
 
 ## Classes should have noun names
 
 {% hint style="success" %}
-**`class Customer    
-class WikiPage    
-class Account`**
+class Customer\
+class WikiPage\
+class Account
 {% endhint %}
 
-## Avoid words \(in the name of a class\)
+## Avoid words (in the name of a class)
 
 {% hint style="danger" %}
-**`Manager   
-Processor   
-Data   
-Info`**
+Manager\
+Processor\
+Data\
+Info
 {% endhint %}
-
