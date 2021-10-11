@@ -75,7 +75,7 @@ If a group of functions perform a similar operation, they should be vertically c
 
 {% hint style="success" %}
 ```php
-public function makeClientToEmployee(): void
+public function upgraClientToEmployee(): void
 {
     $this->type = self::TYPE_EMPLOYEE;
     $this->update('type');
