@@ -14,7 +14,7 @@ interface Report
 ```
 {% endhint %}
 
-## Classes should be cohesive—it results in many small classes
+## Classes should be cohesive—cohesion results in many small classes
 
 Classes should have a small number of instance variables. The more variables a method manipulates the more cohesive that method is to its class. Try to separate the variables and methods into many small classes such that the classes are more cohesive.
 
@@ -28,12 +28,12 @@ class Person
     public $city;
     public $state;
 
-    public function formatName()
+    public function getFullName()
     {
         return $this->givenName.' '.$this->familyName;
     }    
 
-    public function formatAddress()
+    public function getFullAddress()
     {
         return $this->street.', '.$this->city.', '.$this->state;   
     }
@@ -48,7 +48,7 @@ class Name
     public $givenName;
     public $familyName;
 
-    public function format()
+    public function getFullName()
     {
         return $this->givenName.' '.$this->familyName;
     }
@@ -244,4 +244,3 @@ class CommentRepository extends ServiceEntityRepository
 }
 ```
 {% endhint %}
-
