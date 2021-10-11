@@ -93,7 +93,7 @@ protected function calculateAndDeliverPay(Employee $employee): void
 ```
 {% endhint %}
 
-## Avoid nested structures.
+## Avoid nested structures
 
 The blocks within if statements, else statements, while statements should ideally be one line long. That line can be a function call.
 
@@ -207,7 +207,7 @@ public function isNotInAnyRooms(array $rooms): bool
 
 ## Have No Side Effects
 
-The side effect is the call to session\_start\(\). The checkPassword function, by its name, says that it checks the password. The name does not imply that it initializes the session.
+The side effect is the call to session_start(). The checkPassword function, by its name, says that it checks the password. The name does not imply that it initializes the session.
 
 {% hint style="danger" %}
 ```php
@@ -351,4 +351,3 @@ public function remoteLogin(string $data): void
 > When I write functions, they come out long and complicated. But I also have unit tests that cover every one of those clumsy lines of code. So then I massage and refine that code, splitting out functions, changing names, eliminating duplication.
 >
 > — Robert C. Martin
-
