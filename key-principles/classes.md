@@ -60,7 +60,7 @@ class Address
     public $city;
     public $state;
 
-    public function format()
+    public function getFullAddress()
     {
         return $this->street.', '.$this->city.', '.$this->state;       
     }
