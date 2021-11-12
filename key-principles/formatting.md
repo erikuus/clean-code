@@ -75,13 +75,13 @@ If a group of functions perform a similar operation, they should be vertically c
 
 {% hint style="success" %}
 ```php
-public function clientToEmployee(): void
+public function upgradeClientToEmployee(): void
 {
     $this->type = self::TYPE_EMPLOYEE;
     $this->update('type');
 }
 
-public function employeeToClient(): void
+public function downgradeEmployeeToClient(): void
 {
     $this->revokeAll();
     $this->type = self::TYPE_CLIENT;
@@ -143,4 +143,3 @@ public function calculate(Product $product): float
 }
 ```
 {% endhint %}
-
