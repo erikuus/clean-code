@@ -44,7 +44,7 @@ public function pay(EmployeeRepository $employeeRepository): void
 ```php
 public function pay(EmployeeRepository $employeeRepository): void
 {
-    for ($employeeRepository->findAll() as $employee) {
+    foreach ($employeeRepository->findAll() as $employee) {
         $this->payIfNecessary($employee);
     }
 }
@@ -72,7 +72,7 @@ We want every function to be followed by those at the next level of abstraction 
 // First level of abstraction
 public function pay(EmployeeRepository $employeeRepository): void
 {
-    for ($employeeRepository->findAll() as $employee) {
+    foreach ($employeeRepository->findAll() as $employee) {
         $this->payIfNecessary($employee);
     }
 }

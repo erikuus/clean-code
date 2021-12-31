@@ -12,6 +12,6 @@ In this gitbook I **summarize the key principles and strategies** I found most v
 Please note that I use PHP code to illustrate the key points. The Clean Code book is mostly written from a Java perspective.
 {% endhint %}
 
-## About the author
+## About me
 
 [https://www.linkedin.com/in/erik-uus-46304258/](https://www.linkedin.com/in/erik-uus-46304258/)
